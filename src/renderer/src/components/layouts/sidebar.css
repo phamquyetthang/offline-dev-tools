@@ -1,0 +1,3 @@
+.active {
+  @apply bg-accent text-accent-foreground;
+}
