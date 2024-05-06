@@ -12,8 +12,9 @@ import Icon from '../components/icon'
 import { NavLink } from 'react-router-dom'
 import './sidebar.css'
 import { useTheme } from './theme'
+import { memo } from 'react'
 
-export const Sidebar = () => {
+const SidebarComponent = () => {
   const { setTheme, theme } = useTheme()
 
   return (
@@ -64,6 +65,8 @@ export const Sidebar = () => {
     </aside>
   )
 }
+
+export const Sidebar = memo(SidebarComponent)
 
 export const SidebarMobile = () => {
   return (

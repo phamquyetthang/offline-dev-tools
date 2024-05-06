@@ -4,14 +4,16 @@ import { Copy } from 'lucide-react'
 import { toast } from 'sonner'
 interface IProps {
   value: Data & { img?: string }
+  disabled?: boolean
 }
-const CopyButton = ({ value }: IProps) => {
+const CopyButton = ({ value, disabled }: IProps) => {
   return (
     <Button
       onClick={() => {
         window.electron.ipcRenderer.send('clipboard', value)
         toast('Copied to clipboard!')
       }}
+      disabled={disabled}
     >
       Copy <Copy className="w-5 h-5 ml-2" />
     </Button>

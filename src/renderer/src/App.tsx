@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
 
 import { Layout } from './layout'
-import { CATEGORIES, EXTENSIONS } from './models/extensions'
+import { CATEGORIES } from './models/extensions'
 
 const router = createHashRouter([
   {
@@ -12,11 +12,11 @@ const router = createHashRouter([
       ...CATEGORIES.map((c) => ({
         path: c.path,
         element: c.page
-      })),
-      ...EXTENSIONS.map((extension) => ({
-        path: extension.path,
-        element: extension.page
       }))
+      // ...EXTENSIONS.map((extension) => ({
+      //   path: extension.path,
+      //   element: extension.page
+      // }))
     ]
   }
 ])

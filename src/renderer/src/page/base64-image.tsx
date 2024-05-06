@@ -6,8 +6,6 @@ import { Download, ImageUp } from 'lucide-react'
 import { ChangeEvent, useState } from 'react'
 
 const Base64Image = () => {
-  // const [encode, setEncode] = useState('')
-
   const [image, setImage] = useState<ArrayBuffer | string | null>(null)
 
   const onUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +22,14 @@ const Base64Image = () => {
       }
     }
   }
+
+  const onDownload = () => {
+    const a = document.createElement('a')
+    a.href = image?.toString() || ''
+    a.download = 'Image.png'
+    a.click()
+  }
+
   return (
     <div>
       <h3 className="font-semibold mb-4">Base 64 image</h3>
@@ -43,7 +49,7 @@ const Base64Image = () => {
           </CardContent>
           <CardFooter>
             <div className="flex gap-2">
-              <CopyButton value={{ text: image?.toString() }} />
+              <CopyButton value={{ text: image?.toString() }} disabled={!image} />
             </div>
           </CardFooter>
         </Card>
@@ -58,9 +64,7 @@ const Base64Image = () => {
               <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                 <span className="font-semibold">Click to upload</span> or drag and drop
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                SVG, PNG, JPG or GIF (MAX. 800x400px)
-              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">svg, png, jpg, webp or GIF</p>
             </div>
             <input id="dropzone-file" type="file" className="hidden" onChange={onUpload} />
           </label>
@@ -74,10 +78,10 @@ const Base64Image = () => {
         <CardContent>{image && <img className="max-h-96" src={image.toString()} />}</CardContent>
         <CardFooter>
           <div className="flex gap-2">
-            <Button disabled={!image}>
+            <Button disabled={!image} onClick={onDownload}>
               Download <Download className="h-4" />
             </Button>
-            <CopyButton value={{ img: image?.toString() }} />
+            <CopyButton value={{ img: image?.toString() }} disabled={!image} />
           </div>
         </CardFooter>
       </Card>
