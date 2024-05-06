@@ -2,14 +2,19 @@ import { Card, CardContent } from '@lib/components/ui/card'
 import { Pin, PinOff, Wrench } from 'lucide-react'
 import Icon from './icon'
 import dynamicIconImports from 'lucide-react/dynamicIconImports'
+import { useAppDispatch, useAppSelector } from '@renderer/store'
+import { pinAction } from '@renderer/store/slice'
+import { EXTENSION_KEY } from '@renderer/models/extensions'
 
 interface IProps {
-  pined?: boolean
   title: string
   icon?: keyof typeof dynamicIconImports
   alt?: string
+  extensionKey: EXTENSION_KEY
 }
-const CardExtension = ({ pined, icon, title, alt }: IProps) => {
+const CardExtension = ({ icon, title, alt, extensionKey }: IProps) => {
+  const dispatch = useAppDispatch()
+  const pins = useAppSelector((state) => state.app.pinedExtensions)
   return (
     <Card className="w-[220px] hover:shadow-xl cursor-pointer group relative">
       <CardContent className="flex gap-4 p-4 items-center">
@@ -18,9 +23,12 @@ const CardExtension = ({ pined, icon, title, alt }: IProps) => {
         </div>
         <span className="font-semibold">{title}</span>
       </CardContent>
-      <div className=" hidden absolute top-1 right-2 group-hover:block">
-        {pined ? <PinOff className="w-4" /> : <Pin className="w-4" />}
-      </div>
+      <button
+        onClick={() => dispatch(pinAction(extensionKey))}
+        className=" hidden absolute top-1 right-2 group-hover:block"
+      >
+        {pins.includes(extensionKey) ? <PinOff className="w-4" /> : <Pin className="w-4" />}
+      </button>
     </Card>
   )
 }

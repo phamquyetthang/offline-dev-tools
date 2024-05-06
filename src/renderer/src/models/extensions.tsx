@@ -6,48 +6,58 @@ import dynamicIconImports from 'lucide-react/dynamicIconImports'
 import { ReactNode } from 'react'
 
 export interface ICategory {
-  path: CATEGORIES_NAME
+  path: CATEGORIES_KEY
   title: string
   icon: keyof typeof dynamicIconImports
   page: ReactNode
 }
 
-export enum CATEGORIES_NAME {
+export enum CATEGORIES_KEY {
   all = '',
   text = 'text',
   encode_decode = 'encode_decode',
   generators = 'generators'
 }
 
+export enum EXTENSION_KEY {
+  text_formatter = 'text_formatter',
+  text_replacer = 'text_replacer',
+  jwt_decode = 'jwt_decode',
+  generators = 'generators',
+  base64_text = 'base64_text',
+  base64_image = 'base64_image'
+}
+
 export interface IExtension {
   category: string
   path: string
   title: string
+  key: EXTENSION_KEY
   icon?: keyof typeof dynamicIconImports
   page?: ReactNode
   alt?: string
 }
 export const CATEGORIES: ICategory[] = [
   {
-    path: CATEGORIES_NAME.all,
+    path: CATEGORIES_KEY.all,
     title: 'All extensions',
     icon: 'home',
     page: <All />
   },
   {
-    path: CATEGORIES_NAME.text,
+    path: CATEGORIES_KEY.text,
     title: 'Text extensions',
     icon: 'remove-formatting',
     page: <Text />
   },
   {
-    path: CATEGORIES_NAME.encode_decode,
+    path: CATEGORIES_KEY.encode_decode,
     title: 'Encoder/ Decoder',
     icon: 'key-round',
     page: <EncoderDecoder />
   },
   {
-    path: CATEGORIES_NAME.generators,
+    path: CATEGORIES_KEY.generators,
     title: 'Generators Sample',
     icon: 'package',
     page: <Generators />
@@ -56,33 +66,38 @@ export const CATEGORIES: ICategory[] = [
 
 export const EXTENSIONS: IExtension[] = [
   {
-    category: CATEGORIES_NAME.text,
+    category: CATEGORIES_KEY.text,
     path: 'text-formatter',
     title: 'Text Formatter',
-    icon: 'case-sensitive'
+    icon: 'case-sensitive',
+    key: EXTENSION_KEY.text_formatter
   },
   {
-    category: CATEGORIES_NAME.text,
+    category: CATEGORIES_KEY.text,
     path: 'text-replacer',
     title: 'Text Replacer',
-    icon: 'remove-formatting'
+    icon: 'remove-formatting',
+    key: EXTENSION_KEY.text_replacer
   },
   {
-    category: CATEGORIES_NAME.encode_decode,
+    category: CATEGORIES_KEY.encode_decode,
     path: 'jwt-decode',
     title: 'JWT Decoder',
-    icon: 'asterisk'
+    icon: 'asterisk',
+    key: EXTENSION_KEY.jwt_decode
   },
   {
-    category: CATEGORIES_NAME.encode_decode,
+    category: CATEGORIES_KEY.encode_decode,
     path: 'base64-text',
     title: 'Base64 Text',
-    alt: '64'
+    alt: '64',
+    key: EXTENSION_KEY.base64_text
   },
   {
-    category: CATEGORIES_NAME.encode_decode,
+    category: CATEGORIES_KEY.encode_decode,
     path: 'base64-image',
     title: 'Base64 Image',
-    alt: '64'
+    alt: '64',
+    key: EXTENSION_KEY.base64_image
   }
 ]

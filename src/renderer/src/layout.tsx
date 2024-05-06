@@ -1,8 +1,16 @@
 import { Outlet } from 'react-router-dom'
 import { Sidebar } from './components/layouts/sidebar'
 import Header from './components/layouts/header'
+import { useEffect } from 'react'
+import { useAppDispatch } from './store'
+import { syncStore } from './store/slice'
 
 export const Layout = () => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(syncStore())
+  }, [])
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <Sidebar />

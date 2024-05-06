@@ -11,7 +11,13 @@ const GroupExtensions = ({ title, extensions }: IProps) => {
       <h3 className="font-semibold mb-4">{title}</h3>
       <div className="flex flex-wrap gap-4">
         {extensions.map((e) => (
-          <CardExtension pined key={e.path} icon={e.icon} title={e.title} alt={e.alt} />
+          <CardExtension
+            key={e.key}
+            icon={e.icon}
+            title={e.title}
+            alt={e.alt}
+            extensionKey={e.key}
+          />
         ))}
       </div>
     </div>
