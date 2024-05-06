@@ -4,6 +4,7 @@ import Header from './components/layouts/header'
 import { useEffect } from 'react'
 import { useAppDispatch } from './store'
 import { syncStore } from './store/slice'
+import { Toaster } from '@lib/components/ui/sonner'
 
 export const Layout = () => {
   const dispatch = useAppDispatch()
@@ -20,6 +21,7 @@ export const Layout = () => {
           <Outlet />
         </main>
       </div>
+      <Toaster />
     </div>
   )
 }

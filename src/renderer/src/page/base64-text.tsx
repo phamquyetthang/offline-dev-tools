@@ -13,7 +13,7 @@ const Base64Text = () => {
       <h3 className="font-semibold mb-4">Base 64 text</h3>
       <Card>
         <CardHeader>
-          <CardTitle>Decoded</CardTitle>
+          <CardTitle>Origin text</CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea

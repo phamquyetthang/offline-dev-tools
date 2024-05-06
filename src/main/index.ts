@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, clipboard, Data, nativeImage } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import Store from 'electron-store'
@@ -69,6 +69,14 @@ app.whenReady().then(() => {
   })
   ipcMain.on('electron-store-set', async (event, key, val) => {
     store.set(key, val)
+  })
+
+  ipcMain.on('clipboard', async (event, val: Data & { img?: string }) => {
+    if (val.img) {
+      clipboard.writeImage(nativeImage.createFromBuffer(Buffer.from(val.img, 'base64')))
+    } else {
+      clipboard.write(val)
+    }
   })
 })
 

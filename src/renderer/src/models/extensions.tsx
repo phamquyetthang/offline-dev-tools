@@ -1,4 +1,5 @@
 import All from '@renderer/page/all'
+import Base64Image from '@renderer/page/base64-image'
 import Base64Text from '@renderer/page/base64-text'
 import EncoderDecoder from '@renderer/page/encoder-decoder'
 import Generators from '@renderer/page/generators'
@@ -103,8 +104,8 @@ export const EXTENSIONS: IExtension[] = [
     category: CATEGORIES_KEY.encode_decode,
     path: 'base64-image',
     title: 'Base64 Image',
-    alt: '64',
+    icon: 'image',
     key: EXTENSION_KEY.base64_image,
-    page: <JwtDecoder />
+    page: <Base64Image />
   }
 ]
