@@ -1,4 +1,5 @@
 import All from '@renderer/page/all'
+import Base64Text from '@renderer/page/base64-text'
 import EncoderDecoder from '@renderer/page/encoder-decoder'
 import Generators from '@renderer/page/generators'
 import JwtDecoder from '@renderer/page/jwt-decoder'
@@ -96,7 +97,7 @@ export const EXTENSIONS: IExtension[] = [
     title: 'Base64 Text',
     alt: '64',
     key: EXTENSION_KEY.base64_text,
-    page: <JwtDecoder />
+    page: <Base64Text />
   },
   {
     category: CATEGORIES_KEY.encode_decode,
