@@ -17,6 +17,7 @@ const GroupExtensions = ({ title, extensions }: IProps) => {
             title={e.title}
             alt={e.alt}
             extensionKey={e.key}
+            path={e.path}
           />
         ))}
       </div>

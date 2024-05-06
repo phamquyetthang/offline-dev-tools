@@ -1,6 +1,7 @@
 import All from '@renderer/page/all'
 import EncoderDecoder from '@renderer/page/encoder-decoder'
 import Generators from '@renderer/page/generators'
+import JwtDecoder from '@renderer/page/jwt-decoder'
 import Text from '@renderer/page/text'
 import dynamicIconImports from 'lucide-react/dynamicIconImports'
 import { ReactNode } from 'react'
@@ -34,7 +35,7 @@ export interface IExtension {
   title: string
   key: EXTENSION_KEY
   icon?: keyof typeof dynamicIconImports
-  page?: ReactNode
+  page: ReactNode
   alt?: string
 }
 export const CATEGORIES: ICategory[] = [
@@ -70,34 +71,39 @@ export const EXTENSIONS: IExtension[] = [
     path: 'text-formatter',
     title: 'Text Formatter',
     icon: 'case-sensitive',
-    key: EXTENSION_KEY.text_formatter
+    key: EXTENSION_KEY.text_formatter,
+    page: <JwtDecoder />
   },
   {
     category: CATEGORIES_KEY.text,
     path: 'text-replacer',
     title: 'Text Replacer',
     icon: 'remove-formatting',
-    key: EXTENSION_KEY.text_replacer
+    key: EXTENSION_KEY.text_replacer,
+    page: <JwtDecoder />
   },
   {
     category: CATEGORIES_KEY.encode_decode,
     path: 'jwt-decode',
     title: 'JWT Decoder',
     icon: 'asterisk',
-    key: EXTENSION_KEY.jwt_decode
+    key: EXTENSION_KEY.jwt_decode,
+    page: <JwtDecoder />
   },
   {
     category: CATEGORIES_KEY.encode_decode,
     path: 'base64-text',
     title: 'Base64 Text',
     alt: '64',
-    key: EXTENSION_KEY.base64_text
+    key: EXTENSION_KEY.base64_text,
+    page: <JwtDecoder />
   },
   {
     category: CATEGORIES_KEY.encode_decode,
     path: 'base64-image',
     title: 'Base64 Image',
     alt: '64',
-    key: EXTENSION_KEY.base64_image
+    key: EXTENSION_KEY.base64_image,
+    page: <JwtDecoder />
   }
 ]
