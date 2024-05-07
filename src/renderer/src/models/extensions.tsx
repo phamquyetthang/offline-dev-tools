@@ -39,6 +39,7 @@ export interface IExtension {
   icon?: keyof typeof dynamicIconImports
   page: ReactNode
   alt?: string
+  keywords?: string[]
 }
 export const CATEGORIES: ICategory[] = [
   {
@@ -74,7 +75,8 @@ export const EXTENSIONS: IExtension[] = [
     title: 'Text Formatter',
     icon: 'case-sensitive',
     key: EXTENSION_KEY.text_formatter,
-    page: <JwtDecoder />
+    page: <JwtDecoder />,
+    keywords: ['formatter', 'text', 'uppercase', 'lowercase']
   },
   {
     category: CATEGORIES_KEY.text,

@@ -4,7 +4,6 @@ import { useAppSelector } from '@renderer/store'
 import { pinedExtensionsSelector, recentExtensionsSelector } from '@renderer/store/selector'
 
 const All = () => {
-  const extensions = EXTENSIONS
   const pinedExtensions = useAppSelector(pinedExtensionsSelector)
   const recentExtensions = useAppSelector(recentExtensionsSelector)
   return (
@@ -15,7 +14,7 @@ const All = () => {
       {!!recentExtensions.length && (
         <GroupExtensions title="Recent Extensions" extensions={recentExtensions} />
       )}
-      <GroupExtensions title="All Extensions" extensions={extensions} />
+      <GroupExtensions title="All Extensions" extensions={EXTENSIONS} />
     </div>
   )
 }

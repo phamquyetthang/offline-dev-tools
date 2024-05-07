@@ -28,10 +28,13 @@ const CardExtension = ({ icon, title, alt, extensionKey }: IProps) => {
         <span className="font-semibold">{title}</span>
       </CardContent>
       <button
-        onClick={() => dispatch(pinAction(extensionKey))}
-        className=" hidden absolute top-1 right-2 group-hover:block"
+        onClick={(e) => {
+          e.stopPropagation()
+          dispatch(pinAction(extensionKey))
+        }}
+        className="p-2 hidden absolute top-0 right-0 group-hover:block hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg"
       >
-        {pins.includes(extensionKey) ? <PinOff className="w-4" /> : <Pin className="w-4" />}
+        {pins.includes(extensionKey) ? <PinOff className="w-4 h-4" /> : <Pin className="w-4 h-4" />}
       </button>
     </Card>
   )
