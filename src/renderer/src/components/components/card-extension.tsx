@@ -13,9 +13,25 @@ interface IProps {
   extensionKey: EXTENSION_KEY
   path?: string
 }
-const CardExtension = ({ icon, title, alt, extensionKey }: IProps) => {
+
+const PinButton = ({ extensionKey }: { extensionKey: EXTENSION_KEY }) => {
   const dispatch = useAppDispatch()
   const pins = useAppSelector((state) => state.app.pinedExtensions)
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation()
+        dispatch(pinAction(extensionKey))
+      }}
+      className="p-2 hidden absolute top-0 right-0 group-hover:block hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg"
+    >
+      {pins.includes(extensionKey) ? <PinOff className="w-4 h-4" /> : <Pin className="w-4 h-4" />}
+    </button>
+  )
+}
+
+const CardExtension = ({ icon, title, alt, extensionKey }: IProps) => {
+  const dispatch = useAppDispatch()
   return (
     <Card
       className="w-[220px] hover:shadow-xl cursor-pointer group relative"
@@ -27,15 +43,7 @@ const CardExtension = ({ icon, title, alt, extensionKey }: IProps) => {
         </div>
         <span className="font-semibold">{title}</span>
       </CardContent>
-      <button
-        onClick={(e) => {
-          e.stopPropagation()
-          dispatch(pinAction(extensionKey))
-        }}
-        className="p-2 hidden absolute top-0 right-0 group-hover:block hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg"
-      >
-        {pins.includes(extensionKey) ? <PinOff className="w-4 h-4" /> : <Pin className="w-4 h-4" />}
-      </button>
+      <PinButton extensionKey={extensionKey} />
     </Card>
   )
 }
