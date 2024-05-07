@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Sidebar, SidebarMobile } from './components/layouts/sidebar'
+import { Sidebar } from './components/layouts/sidebar'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './store'
 import { closeTag, setActivePage, syncStore } from './store/slice'
@@ -24,14 +24,12 @@ export const Layout = () => {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <Sidebar />
-      <div className="sm:pl-14">
+      <div className="pl-14">
         <Tabs
           value={activePage || 'dashboard'}
           onValueChange={(v) => dispatch(setActivePage(v as EXTENSION_KEY))}
         >
-          <div className="sticky top-0 w-full grid grid-cols-[20px_1fr_128px] sm:grid-cols-[1fr_128px] pr-2 gap-4">
-            <SidebarMobile />
-
+          <div className="sticky top-0 w-full flex pr-2 gap-2">
             <div className="overflow-auto grid-flow-col grid" ref={scrollRef}>
               <TabsList className="justify-start">
                 <TabsTrigger value="dashboard">Dashboard</TabsTrigger>

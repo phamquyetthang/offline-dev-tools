@@ -37,7 +37,7 @@ const SearchBar = () => {
         onClick={() => setOpen(true)}
         type="search"
         placeholder="Search... ⌘F"
-        className="w-[128px] rounded-lg bg-background px-0 pl-8 focus-visible:outline-none"
+        className="w-9 sm:w-[128px] rounded-lg bg-background px-0 pl-8 focus-visible:outline-none"
       />
 
       <CommandDialog
