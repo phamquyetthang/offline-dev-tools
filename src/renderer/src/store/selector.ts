@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { RootState } from '.'
-import { EXTENSIONS, IExtension } from '@renderer/models/extensions'
+import { EXTENSION_KEY, EXTENSIONS, IExtension } from '@renderer/models/extensions'
 
-const getExtensions = (extensions) =>
+const getExtensions = (extensions: EXTENSION_KEY[]): IExtension[] =>
   (extensions || []).reduce((pre: IExtension[] = [], cur) => {
     const extension = EXTENSIONS.find((ex) => ex.key === cur)
     if (extension) {
@@ -24,5 +24,10 @@ export const recentExtensionsSelector = createSelector(
 
 export const activeExtensionsSelector = createSelector(
   (state: RootState) => state.app.activeExtensions,
+  getExtensions
+)
+
+export const extensionsInSecondSelector = createSelector(
+  (state: RootState) => state.app.extensionsInSecond,
   getExtensions
 )
