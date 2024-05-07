@@ -6,6 +6,7 @@ declare global {
       store: {
         get: (key: string) => T
         set: (key: string, val: T) => void
+        delete: (key: string) => void
       }
     }
     api: unknown

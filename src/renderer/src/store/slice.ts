@@ -31,7 +31,12 @@ export const syncStore = createAsyncThunk('app/syncStore', async () => {
 
 export const saveStore = (state: Partial<AppState>) => {
   Object.keys(state).forEach((key) => {
-    window.electron.store.set(key, state[key])
+    if(!state[key]){
+      window.electron.store.delete(key)
+    }else{
+      window.electron.store.set(key, state[key])
+
+    }
   })
 }
 
