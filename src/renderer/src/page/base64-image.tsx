@@ -81,7 +81,6 @@ const Base64Image = () => {
             <Button disabled={!image} onClick={onDownload}>
               Download <Download className="h-4" />
             </Button>
-            <CopyButton value={{ img: image?.toString() }} disabled={!image} />
           </div>
         </CardFooter>
       </Card>

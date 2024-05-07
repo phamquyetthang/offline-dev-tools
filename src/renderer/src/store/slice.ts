@@ -29,35 +29,45 @@ export const syncStore = createAsyncThunk('app/syncStore', async () => {
   }
 })
 
+export const saveStore = (state: Partial<AppState>) => {
+  Object.keys(state).forEach((key) => {
+    window.electron.store.set(key, state[key])
+  })
+}
+
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
     pinAction: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
-      const pinedExtension = state.pinedExtensions.includes(payload)
+      const pinedExtensions = state.pinedExtensions.includes(payload)
         ? state.pinedExtensions.filter((p) => p !== payload)
         : state.pinedExtensions.concat(payload)
-      state.pinedExtensions = pinedExtension
-      window.electron.store.set('pinedExtensions', pinedExtension)
+      state.pinedExtensions = pinedExtensions
+      saveStore({ pinedExtensions })
     },
-    setRecentExtensions: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
-      state.recentExtensions = uniq(state.recentExtensions.concat(payload).reverse()).slice(0, 5)
-      state.activeExtensions = uniq(state.activeExtensions.concat(payload))
+    setRecentExtensions: (state, { payload }: PayloadAction<EXTENSION_KEY | undefined>) => {
+      if (payload) {
+        state.recentExtensions = uniq(state.recentExtensions.concat(payload).reverse()).slice(0, 5)
+        state.activeExtensions = uniq(state.activeExtensions.concat(payload))
+        saveStore({
+          recentExtensions: state.recentExtensions,
+          activeExtensions: state.activeExtensions
+        })
+      }
       state.activePage = payload
-      window.electron.store.set('recentExtensions', state.recentExtensions)
-      window.electron.store.set('activeExtensions', state.activeExtensions)
-      window.electron.store.set('activePage', state.activePage)
+      saveStore({ activePage: payload })
     },
     setActivePage: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
       state.activePage = payload
+      saveStore({ activePage: payload })
     },
     closeTag: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
       state.activeExtensions = state.activeExtensions.filter((ex) => ex !== payload)
       if (state.activePage === payload) {
         state.activePage = state.activeExtensions.slice(-1)[0]
       }
-      window.electron.store.set('activeExtensions', state.activeExtensions)
-      window.electron.store.set('activePage', state.activePage)
+      saveStore({ activePage: state.activePage, activeExtensions: state.activeExtensions })
     }
   },
   extraReducers: (builder) => {

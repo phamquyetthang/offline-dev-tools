@@ -13,9 +13,12 @@ import { NavLink } from 'react-router-dom'
 import './sidebar.css'
 import { useTheme } from './theme'
 import { memo } from 'react'
+import { useAppDispatch } from '@renderer/store'
+import { setRecentExtensions } from '@renderer/store/slice'
 
 const SidebarComponent = () => {
   const { setTheme, theme } = useTheme()
+  const dispatch = useAppDispatch()
 
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -26,6 +29,7 @@ const SidebarComponent = () => {
               <TooltipTrigger asChild>
                 <NavLink
                   to={c.path}
+                  onClick={() => dispatch(setRecentExtensions(undefined))}
                   className="flex items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <Icon name={c.icon} className="h-5 w-5" />
