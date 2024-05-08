@@ -8,6 +8,8 @@ import { lazy } from 'react'
 const JwtDecoder = lazy(() => import('@renderer/page/jwt-decoder'))
 const Base64Image = lazy(() => import('@renderer/page/base64-image'))
 const Base64Text = lazy(() => import('@renderer/page/base64-text'))
+const TextReplacer = lazy(() => import('@renderer/page/text-replacer'))
+
 export interface ICategory {
   path: CATEGORIES_KEY
   title: string
@@ -84,7 +86,7 @@ export const EXTENSIONS: IExtension[] = [
     title: 'Text Replacer',
     icon: 'remove-formatting',
     key: EXTENSION_KEY.text_replacer,
-    page: <JwtDecoder />
+    page: <TextReplacer />
   },
   {
     category: CATEGORIES_KEY.encode_decode,
