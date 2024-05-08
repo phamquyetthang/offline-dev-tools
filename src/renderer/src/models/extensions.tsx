@@ -1,13 +1,13 @@
 import All from '@renderer/page/all'
-import Base64Image from '@renderer/page/base64-image'
-import Base64Text from '@renderer/page/base64-text'
 import EncoderDecoder from '@renderer/page/encoder-decoder'
 import Generators from '@renderer/page/generators'
-import JwtDecoder from '@renderer/page/jwt-decoder'
 import Text from '@renderer/page/text'
 import dynamicIconImports from 'lucide-react/dynamicIconImports'
 import { ReactNode } from 'react'
-
+import { lazy } from 'react'
+const JwtDecoder = lazy(() => import('@renderer/page/jwt-decoder'))
+const Base64Image = lazy(() => import('@renderer/page/base64-image'))
+const Base64Text = lazy(() => import('@renderer/page/base64-text'))
 export interface ICategory {
   path: CATEGORIES_KEY
   title: string

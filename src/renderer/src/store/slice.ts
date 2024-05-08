@@ -35,20 +35,22 @@ export const saveStore = (state: Partial<AppState>) => {
   }
 }
 
-export const removeFromArr = <T>(arr: T[], value: T): { newArr: T[]; preValue: T } => {
-  let preValue = value
-  const newArr = arr.reduce((pre: T[] = [], cur) => {
+export const removeFromArr = <T>(arr: T[], value: T): { newArr: T[]; nextValue: T } => {
+  let nextValue = value
+  const newArr = arr.reduce((pre: T[] = [], cur, index, a) => {
     if (cur !== value) {
       pre.push(cur)
     } else {
-      preValue = preValue === value ? pre.slice(-1)[0] : value
+      if (nextValue === value) {
+        nextValue = pre.slice(-1)[0] || a[index + 1]
+      }
     }
 
     return pre
   }, [])
   return {
     newArr,
-    preValue
+    nextValue
   }
 }
 
@@ -100,31 +102,34 @@ export const appSlice = createSlice({
     },
     closeTag: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
       if (state.activeExtensions.includes(payload)) {
-        const { newArr, preValue } = removeFromArr<EXTENSION_KEY>(state.activeExtensions, payload)
+        const { newArr, nextValue } = removeFromArr<EXTENSION_KEY>(state.activeExtensions, payload)
         state.activeExtensions = newArr
-        state.activePage = preValue
+        state.activePage = nextValue
         saveStore({ activePage: state.activePage, activeExtensions: newArr })
       } else {
-        const { newArr, preValue } = removeFromArr<EXTENSION_KEY>(state.extensionsInSecond, payload)
+        const { newArr, nextValue } = removeFromArr<EXTENSION_KEY>(
+          state.extensionsInSecond,
+          payload
+        )
         state.extensionsInSecond = newArr
-        state.activeInSecond = preValue
+        state.activeInSecond = nextValue
 
         saveStore({
-          activeInSecond: preValue,
+          activeInSecond: nextValue,
           extensionsInSecond: newArr
         })
       }
     },
     moveToSecondTab: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
       const { activeExtensions, extensionsInSecond } = state
-      const { newArr, preValue } = removeFromArr<EXTENSION_KEY>(activeExtensions, payload)
+      const { newArr, nextValue } = removeFromArr<EXTENSION_KEY>(activeExtensions, payload)
       state.activeExtensions = newArr
-      state.activePage = preValue
+      state.activePage = nextValue
       state.extensionsInSecond = uniq(extensionsInSecond.concat(payload))
       state.activeInSecond = payload
       saveStore({
         activeExtensions: newArr,
-        activePage: preValue,
+        activePage: nextValue,
         extensionsInSecond: state.extensionsInSecond,
         activeInSecond: payload
       })
