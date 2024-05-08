@@ -71,6 +71,14 @@ app.whenReady().then(() => {
     store.set(key, val)
   })
 
+  ipcMain.on('electron-store-delete', async (event, key) => {
+    try {
+      store.delete(key)
+    } catch (error) {
+      console.log('🚀 ~ ipcMain.on ~ error:', error)
+    }
+  })
+
   ipcMain.on('clipboard', async (event, val: Data & { img?: string }) => {
     if (val.img) {
       clipboard.writeImage(nativeImage.createFromBuffer(Buffer.from(val.img, 'base64')))

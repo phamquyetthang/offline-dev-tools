@@ -17,6 +17,9 @@ if (process.contextIsolated) {
         },
         set(property, val) {
           ipcRenderer.send('electron-store-set', property, val)
+        },
+        delete(key) {
+          return ipcRenderer.sendSync('electron-store-delete', key)
         }
         // Other method you want to add like has(), reset(), etc.
       }
@@ -35,6 +38,9 @@ if (process.contextIsolated) {
       },
       set(property, val) {
         ipcRenderer.send('electron-store-set', property, val)
+      },
+      delete(key) {
+        return ipcRenderer.sendSync('electron-store-delete', key)
       }
       // Other method you want to add like has(), reset(), etc.
     }

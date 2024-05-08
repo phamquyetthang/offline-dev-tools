@@ -18,17 +18,38 @@ const initialState: AppState = {
   extensionsInSecond: [],
   activeExtensions: [],
   activeInSecond: undefined,
-  activePage: undefined
+  activePage: 'dashboard'
 }
 
 export const saveStore = (state: Partial<AppState>) => {
-  Object.keys(state).forEach((key) => {
-    if (!state[key]) {
-      window.electron.store.delete(key)
+  try {
+    Object.keys(state).forEach((key) => {
+      if (!state[key]) {
+        window.electron.store.set(key, 'deleted')
+      } else {
+        window.electron.store.set(key, state[key])
+      }
+    })
+  } catch (error) {
+    console.log('🚀 ~ saveStore ~ error:', error)
+  }
+}
+
+export const removeFromArr = <T>(arr: T[], value: T): { newArr: T[]; preValue: T } => {
+  let preValue = value
+  const newArr = arr.reduce((pre: T[] = [], cur) => {
+    if (cur !== value) {
+      pre.push(cur)
     } else {
-      window.electron.store.set(key, state[key])
+      preValue = preValue === value ? pre.slice(-1)[0] : value
     }
-  })
+
+    return pre
+  }, [])
+  return {
+    newArr,
+    preValue
+  }
 }
 
 export const appSlice = createSlice({
@@ -60,8 +81,12 @@ export const appSlice = createSlice({
         state.activeInSecond = payload
         saveStore({ activeInSecond: payload })
       } else {
-        state.activePage = payload
-        saveStore({ activePage: payload })
+        try {
+          state.activePage = payload || 'dashboard'
+          saveStore({ activePage: state.activePage })
+        } catch (e) {
+          console.log('🚀 ~ e:', e)
+        }
       }
     },
     setActivePage: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
@@ -74,33 +99,42 @@ export const appSlice = createSlice({
       }
     },
     closeTag: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
-      state.activeExtensions = state.activeExtensions.filter((ex) => ex !== payload)
-      if (state.activePage === payload) {
-        state.activePage = state.activeExtensions.slice(-1)[0]
+      if (state.activeExtensions.includes(payload)) {
+        const { newArr, preValue } = removeFromArr<EXTENSION_KEY>(state.activeExtensions, payload)
+        state.activeExtensions = newArr
+        state.activePage = preValue
+        saveStore({ activePage: state.activePage, activeExtensions: newArr })
+      } else {
+        const { newArr, preValue } = removeFromArr<EXTENSION_KEY>(state.extensionsInSecond, payload)
+        state.extensionsInSecond = newArr
+        state.activeInSecond = preValue
+
+        saveStore({
+          activeInSecond: preValue,
+          extensionsInSecond: newArr
+        })
       }
-      saveStore({ activePage: state.activePage, activeExtensions: state.activeExtensions })
     },
     moveToSecondTab: (state, { payload }: PayloadAction<EXTENSION_KEY>) => {
-      state.activeExtensions = state.activeExtensions.reduce((pre: EXTENSION_KEY[] = [], cur) => {
-        if (cur !== payload) {
-          pre.push(cur)
-        } else {
-          state.activePage = state.activePage === payload ? pre.slice(-1)[0] : payload
-        }
-
-        return pre
-      }, [])
-      state.extensionsInSecond = uniq(state.extensionsInSecond.concat(payload))
+      const { activeExtensions, extensionsInSecond } = state
+      const { newArr, preValue } = removeFromArr<EXTENSION_KEY>(activeExtensions, payload)
+      state.activeExtensions = newArr
+      state.activePage = preValue
+      state.extensionsInSecond = uniq(extensionsInSecond.concat(payload))
       state.activeInSecond = payload
       saveStore({
-        activeExtensions: state.activeExtensions,
+        activeExtensions: newArr,
+        activePage: preValue,
         extensionsInSecond: state.extensionsInSecond,
         activeInSecond: payload
       })
     },
     syncStore: (state) => {
       Object.keys(state).forEach((key) => {
-        state[key] = window.electron.store.get(key)
+        const value = window.electron.store.get(key)
+        if (value && value !== 'deleted') {
+          state[key] = window.electron.store.get(key)
+        }
       })
     }
   }
