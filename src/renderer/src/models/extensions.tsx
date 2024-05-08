@@ -21,7 +21,8 @@ export enum CATEGORIES_KEY {
   all = '',
   text = 'text',
   encode_decode = 'encode_decode',
-  generators = 'generators'
+  generators = 'generators',
+  transform = 'transform'
 }
 
 export enum EXTENSION_KEY {
@@ -30,7 +31,8 @@ export enum EXTENSION_KEY {
   jwt_decode = 'jwt_decode',
   generators = 'generators',
   base64_text = 'base64_text',
-  base64_image = 'base64_image'
+  base64_image = 'base64_image',
+  html_jsx = 'html_jsx'
 }
 
 export interface IExtension {
@@ -49,6 +51,12 @@ export const CATEGORIES: ICategory[] = [
     title: 'All extensions',
     icon: 'home',
     page: <All />
+  },
+  {
+    path: CATEGORIES_KEY.transform,
+    title: 'Transform tools',
+    icon: 'arrow-right-left',
+    page: <Generators />
   },
   {
     path: CATEGORIES_KEY.text,
@@ -111,5 +119,14 @@ export const EXTENSIONS: IExtension[] = [
     icon: 'image',
     key: EXTENSION_KEY.base64_image,
     page: <Base64Image />
+  },
+  {
+    category: CATEGORIES_KEY.transform,
+    path: 'html-jsx',
+    title: 'HTML ⇌ JSX',
+    alt: '{/>',
+    key: EXTENSION_KEY.html_jsx,
+    page: <Base64Image />,
+    keywords: ['html to jsx', 'jsx to html', 'html to react']
   }
 ]

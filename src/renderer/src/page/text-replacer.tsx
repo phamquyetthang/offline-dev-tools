@@ -6,6 +6,7 @@ import { Textarea } from '@lib/components/ui/textarea'
 import CopyButton from '@renderer/components/components/copy-button'
 import { ArrowUpFromLine, Plus, Trash } from 'lucide-react'
 import { ChangeEvent, useState } from 'react'
+import Highlighter from 'react-highlight-words'
 
 const initReplaceArg = {
   pattern: '',
@@ -139,7 +140,10 @@ const TextReplacer = () => {
           <CardTitle>Output</CardTitle>
         </CardHeader>
         <CardContent>
-          <Textarea value={output} />
+          <Highlighter
+            textToHighlight={output}
+            searchWords={replaceArgs.map((r) => r.replacement)}
+          />
         </CardContent>
         <CardFooter>
           <CopyButton value={{ text: output }} disabled={!output} />

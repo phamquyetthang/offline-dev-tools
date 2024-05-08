@@ -20,7 +20,7 @@ const LeftPanel = () => {
 
   const scrollRef = useHorizontalScroll()
   return (
-    <ResizablePanel>
+    <ResizablePanel id="left">
       <div className="pl-14 min-h-screen">
         <Tabs
           value={activePage || 'dashboard'}
@@ -71,7 +71,7 @@ export const RightPanel = () => {
   const dispatch = useAppDispatch()
 
   return (
-    <ResizablePanel>
+    <ResizablePanel id="right">
       <div className="min-h-screen">
         {!!activeInSecond && (
           <Tabs
