@@ -240,19 +240,19 @@ function isNumeric(input) {
   )
 }
 
-let createElement
+// let createElement
 // if (typeof IN_BROWSER !== 'undefined' && IN_BROWSER) {
 //   // Browser environment, use document.createElement directly.
 //   createElement = function (tag) {
 //     return document.createElement(tag)
 //   }
 // } else {
-  // Node.js-like environment, use jsdom.
-  const jsdom = require('jsdom-no-contextify').jsdom
-  const window = jsdom().defaultView
-  createElement = function (tag) {
-    return window.document.createElement(tag)
-  }
+// Node.js-like environment, use jsdom.
+const jsdom = require('jsdom-no-contextify').jsdom
+const window = jsdom().defaultView
+const createElement = function (tag) {
+  return window.document.createElement(tag)
+}
 // }
 
 const tempEl = createElement('div')
@@ -627,23 +627,21 @@ HTMLtoJSX.prototype = {
   }
 }
 
-/**
- * Handles parsing of inline styles
- *
- * @param {string} rawStyle Raw style attribute
- * @constructor
- */
-let StyleParser = function (rawStyle) {
-  this.parse(rawStyle)
-}
-StyleParser.prototype = {
+
+
+export class StyleParser {
+  private styles: { [key: string]: string } = {}
+
+  constructor(rawStyle: string) {
+    this.parse(rawStyle)
+  }
+
   /**
    * Parse the specified inline style attribute value
    * @param {string} rawStyle Raw style attribute
    */
-  parse: function (rawStyle) {
-    this.styles = {}
-    rawStyle.split(';').forEach(function (style) {
+  private parse(rawStyle: string): void {
+    rawStyle.split(';').forEach((style) => {
       style = style.trim()
       const firstColon = style.indexOf(':')
       let key = style.substr(0, firstColon)
@@ -653,8 +651,8 @@ StyleParser.prototype = {
         key = key.toLowerCase()
         this.styles[key] = value
       }
-    }, this)
-  },
+    })
+  }
 
   /**
    * Convert the style information represented by this parser into a JSX
@@ -662,17 +660,13 @@ StyleParser.prototype = {
    *
    * @return {string}
    */
-  toJSXString: function () {
+  public toJSXString(): string {
     const output: string[] = []
-    eachObj(
-      this.styles,
-      function (key, value) {
-        output.push(this.toJSXKey(key) + ': ' + this.toJSXValue(value))
-      },
-      this
+    Object.entries(this.styles).forEach(([key, value]) =>
+      output.push(this.toJSXKey(key) + ': ' + this.toJSXValue(value))
     )
     return output.join(', ')
-  },
+  }
 
   /**
    * Convert the CSS style key to a JSX style key
@@ -680,13 +674,13 @@ StyleParser.prototype = {
    * @param {string} key CSS style key
    * @return {string} JSX style key
    */
-  toJSXKey: function (key) {
+  private toJSXKey(key: string): string {
     // Don't capitalize -ms- prefix
     if (/^-ms-/.test(key)) {
       key = key.substr(1)
     }
     return hyphenToCamelCase(key)
-  },
+  }
 
   /**
    * Convert the CSS style value to a JSX style value
@@ -694,7 +688,7 @@ StyleParser.prototype = {
    * @param {string} value CSS style value
    * @return {string} JSX style value
    */
-  toJSXValue: function (value) {
+  private toJSXValue(value: string): string {
     if (isNumeric(value)) {
       // If numeric, no quotes
       return value
