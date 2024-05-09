@@ -9,6 +9,7 @@ const JwtDecoder = lazy(() => import('@renderer/page/jwt-decoder'))
 const Base64Image = lazy(() => import('@renderer/page/base64-image'))
 const Base64Text = lazy(() => import('@renderer/page/base64-text'))
 const TextReplacer = lazy(() => import('@renderer/page/text-replacer'))
+const HTML_JSX = lazy(() => import('@renderer/page/html-jsx'))
 
 export interface ICategory {
   path: CATEGORIES_KEY
@@ -126,7 +127,7 @@ export const EXTENSIONS: IExtension[] = [
     title: 'HTML ⇌ JSX',
     alt: '{/>',
     key: EXTENSION_KEY.html_jsx,
-    page: <Base64Image />,
+    page: <HTML_JSX />,
     keywords: ['html to jsx', 'jsx to html', 'html to react']
   }
 ]
