@@ -19,11 +19,12 @@ interface EditorProps {
   value: string
   lang?: string
   elKey?: string
+  readOnly?: boolean
   onChange: (v?: string) => void
 }
 
 const EditorContent = memo(
-  function InputEditorWrapper({ value, lang, onChange, elKey }: EditorProps) {
+  function InputEditorWrapper({ value, lang, onChange, elKey, readOnly }: EditorProps) {
     const { height, ref } = useResizeDetector()
 
     return (
@@ -32,7 +33,7 @@ const EditorContent = memo(
           key={elKey}
           value={value}
           language={lang}
-          options={options}
+          options={{ ...options, readOnly }}
           className={clsx('code-editor')}
           onChange={onChange}
           height={(height || 200) - 24}
@@ -44,7 +45,8 @@ const EditorContent = memo(
     return (
       prevProps.value === nextProps.value &&
       prevProps.lang === nextProps.lang &&
-      prevProps.elKey === nextProps.elKey
+      prevProps.elKey === nextProps.elKey &&
+      prevProps.readOnly === nextProps.readOnly
     )
   }
 )
@@ -70,12 +72,13 @@ interface IProps {
   onTransform: (isRevert?: boolean) => void
   inputProps: IInputProps
   outputProps: IOutputProps
+  canRevert?: boolean
 }
 
-const TransformLayout = ({ title, onTransform, inputProps, outputProps }: IProps) => {
+const TransformLayout = ({ title, onTransform, inputProps, outputProps, canRevert }: IProps) => {
   const { inputDesc, inputTitle, onChangeInput, input, inputLang } = inputProps
   const { outputDesc, outputTitle, onChangeOutput, output, outputLang } = outputProps
-  const [isColumn, setIsColumn] = useState(false)
+  const [isColumn, setIsColumn] = useState(true)
   const [isRevert, setIsRevert] = useState(false)
 
   const { width, ref } = useResizeDetector()
@@ -88,9 +91,11 @@ const TransformLayout = ({ title, onTransform, inputProps, outputProps }: IProps
       <div className="flex justify-between overflow-x-hidden mb-8">
         <div className="flex gap-4">
           <h3 className="font-semibold">{title}</h3>
-          <button onClick={() => setIsRevert((pre) => !pre)}>
-            {isRevert ? <ArrowLeftRight /> : <ArrowRightLeft />}
-          </button>
+          {canRevert && (
+            <Button size="icon" className="p-1 w-6 h-6" onClick={() => setIsRevert((pre) => !pre)}>
+              {isRevert ? <ArrowLeftRight /> : <ArrowRightLeft />}
+            </Button>
+          )}
         </div>
 
         <button onClick={() => setIsColumn((pre) => !pre)}>
@@ -111,7 +116,13 @@ const TransformLayout = ({ title, onTransform, inputProps, outputProps }: IProps
             <CardTitle>{inputTitle || 'Input'}</CardTitle>
             {!!inputDesc && <CardDescription className="break-all">{inputDesc}</CardDescription>}
           </CardHeader>
-          <EditorContent elKey={inputKey} onChange={onChangeInput} value={input} lang={inputLang} />
+          <EditorContent
+            elKey={inputKey}
+            onChange={onChangeInput}
+            value={input}
+            lang={inputLang}
+            readOnly={isRevert}
+          />
         </Card>
         <div className="flex justify-around mx-auto">
           <Button onClick={() => onTransform(isRevert)}>Transform</Button>
@@ -126,6 +137,7 @@ const TransformLayout = ({ title, onTransform, inputProps, outputProps }: IProps
             onChange={onChangeOutput}
             value={output}
             lang={outputLang}
+            readOnly={!isRevert}
           />
         </Card>
       </div>

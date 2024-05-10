@@ -2,6 +2,7 @@ import TransformLayout from '@renderer/components/layouts/transform'
 import HTMLtoJSX from '@renderer/utils/html-to-jsx'
 import { useCallback, useState } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
+import parse from 'html-react-parser'
 
 const converter = new HTMLtoJSX({})
 const HTML_JSX = () => {
@@ -11,7 +12,7 @@ const HTML_JSX = () => {
   const onTransform = useCallback(
     (isRevert?: boolean) => {
       if (isRevert) {
-        setHtml(renderToStaticMarkup(jsx))
+        setHtml(renderToStaticMarkup(parse(jsx)))
       } else {
         setJsx(converter.convert(html))
       }
@@ -29,12 +30,13 @@ const HTML_JSX = () => {
       }}
       outputProps={{
         output: jsx,
-        outputLang: 'react',
+        outputLang: 'javascript',
         onChangeOutput: (v) => setJsx(v || ''),
         outputTitle: 'JSX'
       }}
       title="HTML ⇌ JSX transform tool"
       onTransform={onTransform}
+      canRevert
     />
   )
 }
