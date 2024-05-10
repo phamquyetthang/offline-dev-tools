@@ -1,30 +1,40 @@
 import TransformLayout from '@renderer/components/layouts/transform'
-import HtmlToJsx from 'htmltojsx'
-import { useState } from 'react'
-// import { renderToStaticMarkup } from 'react-dom/server'
+import HTMLtoJSX from '@renderer/utils/html-to-jsx'
+import { useCallback, useState } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 
+const converter = new HTMLtoJSX({})
 const HTML_JSX = () => {
-  const [html, setHtml] = useState(``)
+  const [html, setHtml] = useState(`<h1 class="welcome">Enter HTML code here</h1>`)
   const [jsx, setJsx] = useState(``)
+
+  const onTransform = useCallback(
+    (isRevert?: boolean) => {
+      if (isRevert) {
+        setHtml(renderToStaticMarkup(jsx))
+      } else {
+        setJsx(converter.convert(html))
+      }
+    },
+    [html, jsx]
+  )
 
   return (
     <TransformLayout
-      input={html}
-      onChangeInput={(v) => setHtml(v || '')}
-      output={jsx}
-      onChangeOutput={(v) => setJsx(v || '')}
-      title="HTML ⇌ JSX transform tool"
-      inputTitle="HTML"
-      outputTitle="JSX"
-      onTransform={(isRevert) => {
-        console.log("🚀 ~ isRevert:", isRevert)
-        const converter = new HtmlToJsx({
-          createClass: false
-        });
-  
-        // isRevert ? setJsx(parser.parse(html)) : setHtml(renderToStaticMarkup(jsx))
-        console.log('🚀 ~ parser.parse(html):', `export const Foo = () => (${ converter.convert(html)})`)
+      inputProps={{
+        input: html,
+        onChangeInput: (v) => setHtml(v || ''),
+        inputLang: 'html',
+        inputTitle: 'HTML'
       }}
+      outputProps={{
+        output: jsx,
+        outputLang: 'react',
+        onChangeOutput: (v) => setJsx(v || ''),
+        outputTitle: 'JSX'
+      }}
+      title="HTML ⇌ JSX transform tool"
+      onTransform={onTransform}
     />
   )
 }

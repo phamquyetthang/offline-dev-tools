@@ -3899,7 +3899,7 @@ lodash.once@^4.0.0:
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==
 
-lodash@^4.17.15:
+lodash@^4.17.15, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -4613,6 +4613,13 @@ react-resizable-panels@^2.0.19:
   version "2.0.19"
   resolved "https://registry.yarnpkg.com/react-resizable-panels/-/react-resizable-panels-2.0.19.tgz#df259898c682cb774af65c3bc38c1b29c855b99b"
   integrity sha512-v3E41kfKSuCPIvJVb4nL4mIZjjKIn/gh6YqZF/gDfQDolv/8XnhJBek4EiV2gOr3hhc5A3kOGOayk3DhanpaQw==
+
+react-resize-detector@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/react-resize-detector/-/react-resize-detector-10.0.1.tgz#ae9a8c5b6b93c4c11e03b3eb87e57fd7b62f1020"
+  integrity sha512-CR2EdP83ycGlWkhhrd6+hhZVhPJO4xnzClFCTBXlODVTHOgiDJQu77sBt67J7P3gfU4ec/kOuf2c5EcyTUNLXQ==
+  dependencies:
+    lodash "^4.17.21"
 
 react-router-dom@^6.23.0:
   version "6.23.0"

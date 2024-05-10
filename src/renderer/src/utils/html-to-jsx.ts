@@ -248,8 +248,8 @@ function isNumeric(input) {
 //   }
 // } else {
 // Node.js-like environment, use jsdom.
-const jsdom = require('jsdom-no-contextify').jsdom
-const window = jsdom().defaultView
+// const jsdom = require('jsdom-no-contextify').jsdom
+// const window = jsdom().defaultView
 const createElement = function (tag) {
   return window.document.createElement(tag)
 }
@@ -273,9 +273,6 @@ function escapeSpecialChars(value) {
 const HTMLtoJSX = function (config) {
   this.config = config || {}
 
-  if (this.config.createClass === undefined) {
-    this.config.createClass = true
-  }
   if (!this.config.indent) {
     this.config.indent = '  '
   }
@@ -301,16 +298,6 @@ HTMLtoJSX.prototype = {
     const containerEl = createElement('div')
     containerEl.innerHTML = '\n' + this._cleanInput(html) + '\n'
 
-    if (this.config.createClass) {
-      if (this.config.outputClassName) {
-        this.output = 'let ' + this.config.outputClassName + ' = React.createClass({\n'
-      } else {
-        this.output = 'React.createClass({\n'
-      }
-      this.output += this.config.indent + 'render: function() {' + '\n'
-      this.output += this.config.indent + this.config.indent + 'return (\n'
-    }
-
     if (this._onlyOneTopLevel(containerEl)) {
       // Only one top-level element, the component can return it directly
       // No need to actually visit the container element
@@ -323,13 +310,8 @@ HTMLtoJSX.prototype = {
       this._visit(containerEl)
     }
     this.output = this.output.trim() + '\n'
-    if (this.config.createClass) {
-      this.output += this.config.indent + this.config.indent + ');\n'
-      this.output += this.config.indent + '}\n'
-      this.output += '});'
-    } else {
-      this.output = this._removeJSXClassIndention(this.output, this.config.indent)
-    }
+
+    this.output = this._removeJSXClassIndention(this.output, this.config.indent)
     return this.output
   },
 
@@ -626,8 +608,6 @@ HTMLtoJSX.prototype = {
     return output.replace(classIndention, '\n')
   }
 }
-
-
 
 export class StyleParser {
   private styles: { [key: string]: string } = {}

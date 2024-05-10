@@ -3,50 +3,88 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@lib/
 import { ArrowLeftRight, ArrowRightLeft, Columns2, Rows2 } from 'lucide-react'
 import Editor from '@monaco-editor/react'
 import './transform.css'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import clsx from 'clsx'
+import { useResizeDetector } from 'react-resize-detector'
 
 const options = {
   lineNumbersMinChars: 2,
   lineDecorationsWidth: 0,
   minimap: {
     enabled: false
+  }
+}
+
+interface EditorProps {
+  value: string
+  lang?: string
+  elKey?: string
+  onChange: (v?: string) => void
+}
+
+const EditorContent = memo(
+  function InputEditorWrapper({ value, lang, onChange, elKey }: EditorProps) {
+    const { height, ref } = useResizeDetector()
+
+    return (
+      <CardContent ref={ref} className="h-full flex-1 overflow-auto">
+        <Editor
+          key={elKey}
+          value={value}
+          language={lang}
+          options={options}
+          className={clsx('code-editor')}
+          onChange={onChange}
+          height={(height || 200) - 24}
+        />
+      </CardContent>
+    )
   },
-  automaticLayout: true
+  (prevProps, nextProps) => {
+    return (
+      prevProps.value === nextProps.value &&
+      prevProps.lang === nextProps.lang &&
+      prevProps.elKey === nextProps.elKey
+    )
+  }
+)
+
+interface IInputProps {
+  input: string
+  inputLang?: string
+  inputDesc?: string
+  inputTitle?: string
+  onChangeInput: (input?: string) => void
+}
+
+interface IOutputProps {
+  output: string
+  outputLang?: string
+  outputDesc?: string
+  outputTitle?: string
+  onChangeOutput: (output?: string) => void
 }
 
 interface IProps {
-  input: string
-  output: string
   title: string
   onTransform: (isRevert?: boolean) => void
-  onChangeInput: (input?: string) => void
-  onChangeOutput: (output?: string) => void
-  inputLang?: string
-  outputLang?: string
-  inputDesc?: string
-  outputDesc?: string
-  inputTitle?: string
-  outputTitle?: string
+  inputProps: IInputProps
+  outputProps: IOutputProps
 }
-const TransformLayout = ({
-  input,
-  output,
-  title,
-  onTransform,
-  onChangeInput,
-  onChangeOutput,
-  inputLang,
-  outputLang,
-  inputDesc,
-  outputDesc,
-  inputTitle,
-  outputTitle
-}: IProps) => {
+
+const TransformLayout = ({ title, onTransform, inputProps, outputProps }: IProps) => {
+  const { inputDesc, inputTitle, onChangeInput, input, inputLang } = inputProps
+  const { outputDesc, outputTitle, onChangeOutput, output, outputLang } = outputProps
   const [isColumn, setIsColumn] = useState(false)
   const [isRevert, setIsRevert] = useState(false)
+
+  const { width, ref } = useResizeDetector()
+
+  const inputKey = `${width}x${isColumn}`
+  const outputKey = `${width}x${isColumn}`
+
   return (
-    <div>
+    <div className="max-h-screen" ref={ref}>
       <div className="flex justify-between overflow-x-hidden mb-8">
         <div className="flex gap-4">
           <h3 className="font-semibold">{title}</h3>
@@ -68,40 +106,27 @@ const TransformLayout = ({
             : [isRevert ? 'flex-col-reverse' : 'flex-col']
         )}
       >
-        <Card className="flex-1">
+        <Card className="flex-1 flex flex-col items-stretch">
           <CardHeader>
             <CardTitle>{inputTitle || 'Input'}</CardTitle>
             {!!inputDesc && <CardDescription className="break-all">{inputDesc}</CardDescription>}
           </CardHeader>
-          <CardContent>
-            <Editor
-              key={isColumn ? 1 : 2}
-              value={input}
-              language={inputLang}
-              options={options}
-              className={clsx('code-editor', isColumn ? 'min-h-96' : 'min-h-28')}
-              onChange={onChangeInput}
-            />
-          </CardContent>
+          <EditorContent elKey={inputKey} onChange={onChangeInput} value={input} lang={inputLang} />
         </Card>
         <div className="flex justify-around mx-auto">
           <Button onClick={() => onTransform(isRevert)}>Transform</Button>
         </div>
-        <Card className="flex-1">
+        <Card className="flex-1 flex flex-col">
           <CardHeader>
             <CardTitle>{outputTitle || 'Output'}</CardTitle>
             {!!outputDesc && <CardDescription className="break-all">{outputDesc}</CardDescription>}
           </CardHeader>
-          <CardContent>
-            <Editor
-              key={isColumn ? 3 : 4}
-              value={output}
-              language={outputLang}
-              className={clsx('code-editor', isColumn ? 'min-h-96' : 'min-h-28')}
-              options={options}
-              onChange={onChangeOutput}
-            />
-          </CardContent>
+          <EditorContent
+            elKey={outputKey}
+            onChange={onChangeOutput}
+            value={output}
+            lang={outputLang}
+          />
         </Card>
       </div>
     </div>
