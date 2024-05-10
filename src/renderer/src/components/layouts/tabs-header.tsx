@@ -33,6 +33,12 @@ const Tab = ({ tab }: { tab: IExtension }) => {
       value={tab.key}
       className={clsx('flex items-center gap-1', { 'opacity-70': isDragging })}
       ref={drag}
+      onAuxClick={(e) => {
+        if (e.button === 1) {
+          e.stopPropagation()
+          dispatch(closeTag(tab.key))
+        }
+      }}
     >
       {tab.title}{' '}
       <X
