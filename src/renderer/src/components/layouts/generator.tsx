@@ -13,12 +13,16 @@ import { IExtension } from '@renderer/models/extensions.d'
 import { useMemo, useState } from 'react'
 import CopyButton from '../components/copy-button'
 import CopyField from '../components/copy-field'
+import { useAppDispatch } from '@renderer/store'
+import { setRecentExtensions } from '@renderer/store/slice'
 
 interface GeneratorProps {
   extensionKey: string
   generateFunc: () => string
 }
 const Generator = ({ extensionKey, generateFunc }: GeneratorProps) => {
+  const dispatch = useAppDispatch()
+
   const extension = useMemo(
     () => EXTENSIONS_GENERATORS.find((e) => e.key === extensionKey) as IExtension,
     [extensionKey]
@@ -43,7 +47,12 @@ const Generator = ({ extensionKey, generateFunc }: GeneratorProps) => {
           <CardTitle>Schema</CardTitle>
         </CardHeader>
         <CardContent>
-          <Select value={extensionKey}>
+          <Select
+            value={extensionKey}
+            onValueChange={(value) => {
+              dispatch(setRecentExtensions(value))
+            }}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Theme" />
             </SelectTrigger>

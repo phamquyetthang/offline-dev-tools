@@ -14,6 +14,7 @@ const TextReplacer = lazy(() => import('@renderer/page/text-replacer'))
 const HTML_JSX = lazy(() => import('@renderer/page/html-jsx'))
 const Base64URL = lazy(() => import('@renderer/page/base64-url'))
 const UuidGenerator = lazy(() => import('@renderer/page/uuid-generator'))
+const ObjectIdGenerator = lazy(() => import('@renderer/page/object-id-generator'))
 
 export const CATEGORIES: ICategory[] = [
   {
@@ -84,7 +85,7 @@ export const EXTENSIONS_GENERATORS: IExtension[] = [
     title: 'Mongo ObjectId',
     key: EXTENSION_KEY.object_id,
     iconNode: <SiMongodb />,
-    page: <HTML_JSX />,
+    page: <ObjectIdGenerator />,
     keywords: ['Mongo ObjectID Generator', 'id']
   }
 ]
