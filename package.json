@@ -1,7 +1,7 @@
 {
   "name": "dev-sp",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "Providing a set of development tools for developer",
   "main": "./out/main/index.js",
   "author": "example.com",
   "homepage": "https://electron-vite.org",
