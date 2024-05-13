@@ -10,7 +10,8 @@ const Base64Image = lazy(() => import('@renderer/page/base64-image'))
 const Base64Text = lazy(() => import('@renderer/page/base64-text'))
 const TextReplacer = lazy(() => import('@renderer/page/text-replacer'))
 const HTML_JSX = lazy(() => import('@renderer/page/html-jsx'))
-const SVG_JSX = lazy(() => import('@renderer/page/svg-jsx'))
+const Base64URL = lazy(() => import('@renderer/page/base64-url'))
+// const SVG_JSX = lazy(() => import('@renderer/page/svg-jsx'))
 
 export interface ICategory {
   path: CATEGORIES_KEY
@@ -35,7 +36,8 @@ export enum EXTENSION_KEY {
   base64_text = 'base64_text',
   base64_image = 'base64_image',
   html_jsx = 'html_jsx',
-  svg_jsx = 'svg_jsx'
+  svg_jsx = 'svg_jsx',
+  base64_url = 'base64_url',
 }
 
 export interface IExtension {
@@ -132,13 +134,21 @@ export const EXTENSIONS: IExtension[] = [
     page: <HTML_JSX />,
     keywords: ['html to jsx', 'jsx to html', 'html to react']
   },
+  // {
+  //   category: CATEGORIES_KEY.transform,
+  //   path: 'svg-jsx',
+  //   title: 'SVG to JSX',
+  //   alt: 'svg',
+  //   key: EXTENSION_KEY.svg_jsx,
+  //   page: <SVG_JSX />,
+  //   keywords: ['svg to jsx', 'svg to react']
+  // }.
   {
-    category: CATEGORIES_KEY.transform,
-    path: 'svg-jsx',
-    title: 'SVG to JSX',
-    alt: 'svg',
-    key: EXTENSION_KEY.svg_jsx,
-    page: <SVG_JSX />,
-    keywords: ['svg to jsx', 'svg to react']
+    category: CATEGORIES_KEY.encode_decode,
+    path: 'base64-url',
+    title: 'Base64 URL',
+    icon: 'link',
+    key: EXTENSION_KEY.base64_url,
+    page: <Base64URL />
   }
 ]

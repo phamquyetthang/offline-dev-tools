@@ -37,6 +37,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
+    "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
