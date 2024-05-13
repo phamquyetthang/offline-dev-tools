@@ -1,5 +1,6 @@
 import GroupExtensions from '@renderer/components/components/group-extensions'
-import { CATEGORIES, CATEGORIES_KEY, EXTENSIONS } from '@renderer/models/extensions'
+import { CATEGORIES, EXTENSIONS } from '@renderer/models/extensions'
+import { CATEGORIES_KEY } from '@renderer/models/extensions.d'
 
 const EncoderDecoder = () => {
   const category = CATEGORIES.find((c) => c.path === CATEGORIES_KEY.encode_decode)

@@ -1,55 +1,19 @@
+import { lazy } from 'react'
+import { CATEGORIES_KEY, EXTENSION_KEY, ICategory, IExtension } from '@renderer/models/extensions.d'
+import { SiMongodb } from 'react-icons/si'
+
 import All from '@renderer/page/all'
 import EncoderDecoder from '@renderer/page/encoder-decoder'
 import Generators from '@renderer/page/generators'
 import Text from '@renderer/page/text'
-import dynamicIconImports from 'lucide-react/dynamicIconImports'
-import { ReactNode } from 'react'
-import { lazy } from 'react'
+
 const JwtDecoder = lazy(() => import('@renderer/page/jwt-decoder'))
 const Base64Image = lazy(() => import('@renderer/page/base64-image'))
 const Base64Text = lazy(() => import('@renderer/page/base64-text'))
 const TextReplacer = lazy(() => import('@renderer/page/text-replacer'))
 const HTML_JSX = lazy(() => import('@renderer/page/html-jsx'))
 const Base64URL = lazy(() => import('@renderer/page/base64-url'))
-// const SVG_JSX = lazy(() => import('@renderer/page/svg-jsx'))
 
-export interface ICategory {
-  path: CATEGORIES_KEY
-  title: string
-  icon: keyof typeof dynamicIconImports
-  page: ReactNode
-}
-
-export enum CATEGORIES_KEY {
-  all = '',
-  text = 'text',
-  encode_decode = 'encode_decode',
-  generators = 'generators',
-  transform = 'transform'
-}
-
-export enum EXTENSION_KEY {
-  text_formatter = 'text_formatter',
-  text_replacer = 'text_replacer',
-  jwt_decode = 'jwt_decode',
-  generators = 'generators',
-  base64_text = 'base64_text',
-  base64_image = 'base64_image',
-  html_jsx = 'html_jsx',
-  svg_jsx = 'svg_jsx',
-  base64_url = 'base64_url',
-}
-
-export interface IExtension {
-  category: string
-  path: string
-  title: string
-  key: EXTENSION_KEY
-  icon?: keyof typeof dynamicIconImports
-  page: ReactNode
-  alt?: string
-  keywords?: string[]
-}
 export const CATEGORIES: ICategory[] = [
   {
     path: CATEGORIES_KEY.all,
@@ -83,7 +47,7 @@ export const CATEGORIES: ICategory[] = [
   }
 ]
 
-export const EXTENSIONS: IExtension[] = [
+export const EXTENSIONS_TEXT: IExtension[] = [
   {
     category: CATEGORIES_KEY.text,
     path: 'text-formatter',
@@ -100,7 +64,43 @@ export const EXTENSIONS: IExtension[] = [
     icon: 'remove-formatting',
     key: EXTENSION_KEY.text_replacer,
     page: <TextReplacer />
+  }
+]
+
+export const EXTENSIONS_GENERATORS: IExtension[] = [
+  {
+    category: CATEGORIES_KEY.generators,
+    path: 'uuid',
+    title: 'UUID Generator',
+    key: EXTENSION_KEY.uuid,
+    icon: 'key-square',
+    page: <HTML_JSX />,
+    keywords: ['UUID Generator', 'id']
   },
+  {
+    category: CATEGORIES_KEY.generators,
+    path: 'object_id',
+    title: 'Mongo ObjectId',
+    key: EXTENSION_KEY.object_id,
+    iconNode: <SiMongodb />,
+    page: <HTML_JSX />,
+    keywords: ['Mongo ObjectID Generator', 'id']
+  }
+]
+
+export const EXTENSIONS_TRANSFORM: IExtension[] = [
+  {
+    category: CATEGORIES_KEY.transform,
+    path: 'html-jsx',
+    title: 'HTML ⇌ JSX',
+    alt: '{/>',
+    key: EXTENSION_KEY.html_jsx,
+    page: <HTML_JSX />,
+    keywords: ['html to jsx', 'jsx to html', 'html to react']
+  }
+]
+
+export const EXTENSIONS_ENCODE_DECODE: IExtension[] = [
   {
     category: CATEGORIES_KEY.encode_decode,
     path: 'jwt-decode',
@@ -126,24 +126,6 @@ export const EXTENSIONS: IExtension[] = [
     page: <Base64Image />
   },
   {
-    category: CATEGORIES_KEY.transform,
-    path: 'html-jsx',
-    title: 'HTML ⇌ JSX',
-    alt: '{/>',
-    key: EXTENSION_KEY.html_jsx,
-    page: <HTML_JSX />,
-    keywords: ['html to jsx', 'jsx to html', 'html to react']
-  },
-  // {
-  //   category: CATEGORIES_KEY.transform,
-  //   path: 'svg-jsx',
-  //   title: 'SVG to JSX',
-  //   alt: 'svg',
-  //   key: EXTENSION_KEY.svg_jsx,
-  //   page: <SVG_JSX />,
-  //   keywords: ['svg to jsx', 'svg to react']
-  // }.
-  {
     category: CATEGORIES_KEY.encode_decode,
     path: 'base64-url',
     title: 'Base64 URL',
@@ -151,4 +133,11 @@ export const EXTENSIONS: IExtension[] = [
     key: EXTENSION_KEY.base64_url,
     page: <Base64URL />
   }
+]
+
+export const EXTENSIONS: IExtension[] = [
+  ...EXTENSIONS_TEXT,
+  ...EXTENSIONS_GENERATORS,
+  ...EXTENSIONS_TRANSFORM,
+  ...EXTENSIONS_ENCODE_DECODE
 ]

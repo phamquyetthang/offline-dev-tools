@@ -1,4 +1,4 @@
-import { IExtension } from '@renderer/models/extensions'
+import { IExtension } from '@renderer/models/extensions.d'
 import CardExtension from './card-extension'
 
 interface IProps {
@@ -18,6 +18,7 @@ const GroupExtensions = ({ title, extensions }: IProps) => {
             alt={e.alt}
             extensionKey={e.key}
             path={e.path}
+            iconNode={e.iconNode}
           />
         ))}
       </div>

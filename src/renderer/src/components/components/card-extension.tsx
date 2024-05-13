@@ -1,17 +1,12 @@
 import { Card, CardContent } from '@lib/components/ui/card'
 import { Pin, PinOff, Wrench } from 'lucide-react'
 import Icon from './icon'
-import dynamicIconImports from 'lucide-react/dynamicIconImports'
 import { useAppDispatch, useAppSelector } from '@renderer/store'
 import { pinAction, setRecentExtensions } from '@renderer/store/slice'
-import { EXTENSION_KEY } from '@renderer/models/extensions'
+import { EXTENSION_KEY, IExtension } from '@renderer/models/extensions.d'
 
-interface IProps {
-  title: string
-  icon?: keyof typeof dynamicIconImports
-  alt?: string
+interface IProps extends Omit<IExtension, 'category' | 'page'> {
   extensionKey: EXTENSION_KEY
-  path?: string
 }
 
 const PinButton = ({ extensionKey }: { extensionKey: EXTENSION_KEY }) => {
@@ -30,7 +25,7 @@ const PinButton = ({ extensionKey }: { extensionKey: EXTENSION_KEY }) => {
   )
 }
 
-const CardExtension = ({ icon, title, alt, extensionKey }: IProps) => {
+const CardExtension = ({ icon, title, alt, extensionKey, iconNode }: IProps) => {
   const dispatch = useAppDispatch()
   return (
     <Card
@@ -39,7 +34,7 @@ const CardExtension = ({ icon, title, alt, extensionKey }: IProps) => {
     >
       <CardContent className="flex gap-4 p-4 items-center">
         <div className="border shadow rounded w-10 h-10 leading-none font-bold flex items-center justify-center">
-          {icon ? <Icon name={icon} /> : alt || <Wrench />}
+          {iconNode || (icon ? <Icon name={icon} /> : alt || <Wrench />)}
         </div>
         <span className="font-semibold">{title}</span>
       </CardContent>

@@ -7,12 +7,13 @@ import {
   CommandList
 } from '@lib/components/ui/command'
 import { Input } from '@lib/components/ui/input'
-import { EXTENSION_KEY, EXTENSIONS } from '@renderer/models/extensions'
+import { EXTENSION_KEY } from '@renderer/models/extensions.d'
 import { Search, Wrench } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Icon from '../components/icon'
 import { useAppDispatch } from '@renderer/store'
 import { setRecentExtensions } from '@renderer/store/slice'
+import { EXTENSIONS } from '@renderer/models/extensions'
 
 const SearchBar = () => {
   const [open, setOpen] = useState(false)
@@ -65,19 +66,22 @@ const SearchBar = () => {
                   dispatch(setRecentExtensions(value as EXTENSION_KEY))
                 }}
               >
-                {e.icon ? (
-                  <Icon name={e.icon} className="mr-2 h-4 w-4" />
-                ) : e.alt ? (
-                  <div className="mr-2 h-5 w-5 font-bold">
-                    <svg viewBox="0 0 20 20">
-                      <text x="2" y="15">
-                        {e.alt}
-                      </text>
-                    </svg>
-                  </div>
-                ) : (
-                  <Wrench />
-                )}
+                <div className="mr-2">
+                  {e.iconNode ||
+                    (e.icon ? (
+                      <Icon name={e.icon} className="h-4 w-4" />
+                    ) : e.alt ? (
+                      <div className="h-5 w-5 font-bold">
+                        <svg viewBox="0 0 20 20">
+                          <text x="2" y="15">
+                            {e.alt}
+                          </text>
+                        </svg>
+                      </div>
+                    ) : (
+                      <Wrench />
+                    ))}
+                </div>
 
                 <span>{e.title}</span>
               </CommandItem>
