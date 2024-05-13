@@ -13,6 +13,7 @@ const Base64Text = lazy(() => import('@renderer/page/base64-text'))
 const TextReplacer = lazy(() => import('@renderer/page/text-replacer'))
 const HTML_JSX = lazy(() => import('@renderer/page/html-jsx'))
 const Base64URL = lazy(() => import('@renderer/page/base64-url'))
+const UuidGenerator = lazy(() => import('@renderer/page/uuid-generator'))
 
 export const CATEGORIES: ICategory[] = [
   {
@@ -74,7 +75,7 @@ export const EXTENSIONS_GENERATORS: IExtension[] = [
     title: 'UUID Generator',
     key: EXTENSION_KEY.uuid,
     icon: 'key-square',
-    page: <HTML_JSX />,
+    page: <UuidGenerator />,
     keywords: ['UUID Generator', 'id']
   },
   {
