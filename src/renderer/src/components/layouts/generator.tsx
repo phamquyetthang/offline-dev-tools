@@ -9,7 +9,7 @@ import {
   SelectValue
 } from '@lib/components/ui/select'
 import { EXTENSIONS_GENERATORS } from '@renderer/models/extensions'
-import { IExtension } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY, IExtension } from '@renderer/models/extensions.d'
 import { useMemo, useState } from 'react'
 import CopyButton from '../components/copy-button'
 import CopyField from '../components/copy-field'
@@ -50,7 +50,7 @@ const Generator = ({ extensionKey, generateFunc }: GeneratorProps) => {
           <Select
             value={extensionKey}
             onValueChange={(value) => {
-              dispatch(setRecentExtensions(value))
+              dispatch(setRecentExtensions(value as EXTENSION_KEY))
             }}
           >
             <SelectTrigger className="w-[180px]">

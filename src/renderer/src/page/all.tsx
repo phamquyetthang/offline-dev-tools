@@ -5,8 +5,6 @@ import { pinedExtensionsSelector, recentExtensionsSelector } from '@renderer/sto
 import { memo } from 'react'
 
 const AllExtension = memo(function AllExtensionComponent() {
-  console.log('🚀 ~ AllExtension ~ EXTENSIONS:', EXTENSIONS)
-
   return <GroupExtensions title="All Extensions" extensions={EXTENSIONS} />
 })
 

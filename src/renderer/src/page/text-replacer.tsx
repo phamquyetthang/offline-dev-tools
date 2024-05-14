@@ -48,7 +48,7 @@ const TextReplacer = () => {
   }
 
   const onRemoveArg = (index: number) => {
-    setReplaceArgs((pre) => pre.filter((v, i) => i !== index))
+    setReplaceArgs((pre) => pre.filter((_, i) => i !== index))
   }
 
   const onReplace = () => {

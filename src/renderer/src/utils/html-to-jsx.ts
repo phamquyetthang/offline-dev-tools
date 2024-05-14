@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SVGDOMPropertyConfig from 'react-dom-core/lib/SVGDOMPropertyConfig'
 import HTMLDOMPropertyConfig from 'react-dom-core/lib/HTMLDOMPropertyConfig'
 
@@ -217,7 +218,7 @@ function trimEnd(haystack, needle) {
  * Convert a hyphenated string to camelCase.
  */
 function hyphenToCamelCase(string) {
-  return string.replace(/-(.)/g, function (match, chr) {
+  return string.replace(/-(.)/g, function (_, chr) {
     return chr.toUpperCase()
   })
 }
@@ -270,29 +271,34 @@ function escapeSpecialChars(value) {
   return tempEl.innerHTML
 }
 
-const HTMLtoJSX = function (config) {
-  this.config = config || {}
+class HTMLtoJSX {
+  config: any
+  output: any
+  level: any
+  _inPreTag: any
 
-  if (!this.config.indent) {
-    this.config.indent = '  '
+  constructor(config) {
+    this.config = config || {}
+
+    if (!this.config.indent) {
+      this.config.indent = '  '
+    }
   }
-}
-HTMLtoJSX.prototype = {
   /**
    * Reset the internal state of the converter
    */
-  reset: function () {
+  public reset() {
     this.output = ''
     this.level = 0
     this._inPreTag = false
-  },
+  }
   /**
    * Main entry point to the converter. Given the specified HTML, returns a
    * JSX object representing it.
    * @param {string} html HTML to convert
    * @return {string} JSX
    */
-  convert: function (html) {
+  public convert(html) {
     this.reset()
 
     const containerEl = createElement('div')
@@ -313,7 +319,7 @@ HTMLtoJSX.prototype = {
 
     this.output = this._removeJSXClassIndention(this.output, this.config.indent)
     return this.output
-  },
+  }
 
   /**
    * Cleans up the specified HTML so it's in a format acceptable for
@@ -322,14 +328,14 @@ HTMLtoJSX.prototype = {
    * @param {string} html HTML to clean
    * @return {string} Cleaned HTML
    */
-  _cleanInput: function (html) {
+  public _cleanInput(html) {
     // Remove unnecessary whitespace
     html = html.trim()
     // Ugly method to strip script tags. They can wreak havoc on the DOM nodes
     // so let's not even put them in the DOM.
     html = html.replace(/<script([\s\S]*?)<\/script>/g, '')
     return html
-  },
+  }
 
   /**
    * Determines if there's only one top-level node in the DOM tree. That is,
@@ -338,7 +344,7 @@ HTMLtoJSX.prototype = {
    * @param {DOMElement} containerEl Container element
    * @return {boolean}
    */
-  _onlyOneTopLevel: function (containerEl) {
+  _onlyOneTopLevel(containerEl) {
     // Only a single child element
     if (
       containerEl.childNodes.length === 1 &&
@@ -364,7 +370,7 @@ HTMLtoJSX.prototype = {
       }
     }
     return true
-  },
+  }
 
   /**
    * Gets a newline followed by the correct indentation for the current
@@ -372,40 +378,40 @@ HTMLtoJSX.prototype = {
    *
    * @return {string}
    */
-  _getIndentedNewline: function () {
+  _getIndentedNewline() {
     return '\n' + repeatString(this.config.indent, this.level + 2)
-  },
+  }
 
   /**
    * Handles processing the specified node
    *
    * @param {Node} node
    */
-  _visit: function (node) {
+  public _visit(node) {
     this._beginVisit(node)
     this._traverse(node)
     this._endVisit(node)
-  },
+  }
 
   /**
    * Traverses all the children of the specified node
    *
    * @param {Node} node
    */
-  _traverse: function (node) {
+  public _traverse(node) {
     this.level++
     for (let i = 0, count = node.childNodes.length; i < count; i++) {
       this._visit(node.childNodes[i])
     }
     this.level--
-  },
+  }
 
   /**
    * Handle pre-visit behaviour for the specified node.
    *
    * @param {Node} node
    */
-  _beginVisit: function (node) {
+  _beginVisit(node) {
     switch (node.nodeType) {
       case NODE_TYPE.ELEMENT:
         this._beginVisitElement(node)
@@ -422,14 +428,14 @@ HTMLtoJSX.prototype = {
       default:
         console.warn('Unrecognised node type: ' + node.nodeType)
     }
-  },
+  }
 
   /**
    * Handles post-visit behaviour for the specified node.
    *
    * @param {Node} node
    */
-  _endVisit: function (node) {
+  _endVisit(node) {
     switch (node.nodeType) {
       case NODE_TYPE.ELEMENT:
         this._endVisitElement(node)
@@ -439,14 +445,14 @@ HTMLtoJSX.prototype = {
       case NODE_TYPE.COMMENT:
         break
     }
-  },
+  }
 
   /**
    * Handles pre-visit behaviour for the specified element node
    *
    * @param {DOMElement} node
    */
-  _beginVisitElement: function (node) {
+  _beginVisitElement(node) {
     const tagName = jsxTagName(node.tagName)
     const attributes: string[] = []
     for (let i = 0, count = node.attributes.length; i < count; i++) {
@@ -474,14 +480,14 @@ HTMLtoJSX.prototype = {
     if (!this._isSelfClosing(node)) {
       this.output += '>'
     }
-  },
+  }
 
   /**
    * Handles post-visit behaviour for the specified element node
    *
    * @param {Node} node
    */
-  _endVisitElement: function (node) {
+  _endVisitElement(node) {
     const tagName = jsxTagName(node.tagName)
     // De-indent a bit
     // TODO: It's inefficient to do it this way :/
@@ -495,8 +501,7 @@ HTMLtoJSX.prototype = {
     if (tagName === 'pre') {
       this._inPreTag = false
     }
-  },
-
+  }
   /**
    * Determines if this element node should be rendered as a self-closing
    * tag.
@@ -504,19 +509,19 @@ HTMLtoJSX.prototype = {
    * @param {Node} node
    * @return {boolean}
    */
-  _isSelfClosing: function (node) {
+  _isSelfClosing(node) {
     const tagName = jsxTagName(node.tagName)
     // If it has children, it's not self-closing
     // Exception: All children of a textarea are moved to a "defaultValue" attribute, style attributes are dangerously set.
     return !node.firstChild || tagName === 'textarea' || tagName === 'style'
-  },
+  }
 
   /**
    * Handles processing of the specified text node
    *
    * @param {TextNode} node
    */
-  _visitText: function (node) {
+  _visitText(node) {
     const parentTag = node.parentNode && jsxTagName(node.parentNode.tagName)
     if (parentTag === 'textarea' || parentTag === 'style') {
       // Ignore text content of textareas and styles, as it will have already been moved
@@ -544,16 +549,16 @@ HTMLtoJSX.prototype = {
       }
     }
     this.output += text
-  },
+  }
 
   /**
    * Handles processing of the specified text node
    *
    * @param {Text} node
    */
-  _visitComment: function (node) {
+  _visitComment(node) {
     this.output += '{/*' + node.textContent.replace('*/', '* /') + '*/}'
-  },
+  }
 
   /**
    * Gets a JSX formatted version of the specified attribute from the node
@@ -562,7 +567,7 @@ HTMLtoJSX.prototype = {
    * @param {object}     attribute
    * @return {string}
    */
-  _getElementAttribute: function (node, attribute) {
+  _getElementAttribute(node, attribute) {
     const tagName = jsxTagName(node.tagName)
     const name =
       (ELEMENT_ATTRIBUTE_MAPPING[tagName] && ELEMENT_ATTRIBUTE_MAPPING[tagName][attribute.name]) ||
@@ -582,7 +587,7 @@ HTMLtoJSX.prototype = {
         }
         return result
     }
-  },
+  }
 
   /**
    * Gets a JSX formatted version of the specified element styles
@@ -590,10 +595,10 @@ HTMLtoJSX.prototype = {
    * @param {string} styles
    * @return {string}
    */
-  _getStyleAttribute: function (styles) {
+  _getStyleAttribute(styles) {
     const jsxStyles = new StyleParser(styles).toJSXString()
     return 'style={{' + jsxStyles + '}}'
-  },
+  }
 
   /**
    * Removes class-level indention in the JSX output. To be used when the JSX
@@ -603,7 +608,7 @@ HTMLtoJSX.prototype = {
    * @param {string} indent Configured indention
    * @return {string} JSX output wihtout class-level indention
    */
-  _removeJSXClassIndention: function (output, indent) {
+  _removeJSXClassIndention(output, indent) {
     const classIndention = new RegExp('\\n' + indent + indent + indent, 'g')
     return output.replace(classIndention, '\n')
   }

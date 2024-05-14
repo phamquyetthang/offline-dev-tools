@@ -1,9 +1,10 @@
-import { app, shell, BrowserWindow, ipcMain, clipboard, Data, nativeImage } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, clipboard, Data, nativeImage, Tray } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import Store from 'electron-store'
 
 import icon from '../../resources/icon.png?asset'
+const appIcon = nativeImage.createFromPath(icon)
 
 const store = new Store()
 
@@ -15,7 +16,7 @@ function createWindow(): void {
     show: false,
     title: 'Office Dev Tools',
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    ...(process.platform === 'linux' ? { icon: appIcon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -48,7 +49,7 @@ function createWindow(): void {
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
-
+  new Tray(appIcon)
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
   // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
@@ -70,11 +71,11 @@ app.whenReady().then(() => {
   ipcMain.on('electron-store-get', async (event, val) => {
     event.returnValue = store.get(val)
   })
-  ipcMain.on('electron-store-set', async (event, key, val) => {
+  ipcMain.on('electron-store-set', async (_, key, val) => {
     store.set(key, val)
   })
 
-  ipcMain.on('electron-store-delete', async (event, key) => {
+  ipcMain.on('electron-store-delete', async (_, key) => {
     try {
       store.delete(key)
     } catch (error) {
@@ -82,7 +83,7 @@ app.whenReady().then(() => {
     }
   })
 
-  ipcMain.on('clipboard', async (event, val: Data & { img?: string }) => {
+  ipcMain.on('clipboard', async (_, val: Data & { img?: string }) => {
     if (val.img) {
       clipboard.writeImage(nativeImage.createFromBuffer(Buffer.from(val.img, 'base64')))
     } else {
