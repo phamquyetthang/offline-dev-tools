@@ -1,123 +1,123 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import SVGDOMPropertyConfig from 'react-dom-core/lib/SVGDOMPropertyConfig'
-import HTMLDOMPropertyConfig from 'react-dom-core/lib/HTMLDOMPropertyConfig'
+import SVGDOMPropertyConfig from "react-dom-core/lib/SVGDOMPropertyConfig";
+import HTMLDOMPropertyConfig from "react-dom-core/lib/HTMLDOMPropertyConfig";
 
 const NODE_TYPE = {
   ELEMENT: 1,
   TEXT: 3,
-  COMMENT: 8
-}
+  COMMENT: 8,
+};
 
 const ATTRIBUTE_MAPPING = {
-  for: 'htmlFor',
-  class: 'className'
-}
+  for: "htmlFor",
+  class: "className",
+};
 
 const ELEMENT_ATTRIBUTE_MAPPING = {
   input: {
-    checked: 'defaultChecked',
-    value: 'defaultValue',
-    autofocus: 'autoFocus'
-  }
-}
+    checked: "defaultChecked",
+    value: "defaultValue",
+    autofocus: "autoFocus",
+  },
+};
 
 // Reference: https://developer.mozilla.org/en-US/docs/Web/SVG/Element#SVG_elements
 const ELEMENT_TAG_NAME_MAPPING = {
-  a: 'a',
-  altglyph: 'altGlyph',
-  altglyphdef: 'altGlyphDef',
-  altglyphitem: 'altGlyphItem',
-  animate: 'animate',
-  animatecolor: 'animateColor',
-  animatemotion: 'animateMotion',
-  animatetransform: 'animateTransform',
-  audio: 'audio',
-  canvas: 'canvas',
-  circle: 'circle',
-  clippath: 'clipPath',
-  'color-profile': 'colorProfile',
-  cursor: 'cursor',
-  defs: 'defs',
-  desc: 'desc',
-  discard: 'discard',
-  ellipse: 'ellipse',
-  feblend: 'feBlend',
-  fecolormatrix: 'feColorMatrix',
-  fecomponenttransfer: 'feComponentTransfer',
-  fecomposite: 'feComposite',
-  feconvolvematrix: 'feConvolveMatrix',
-  fediffuselighting: 'feDiffuseLighting',
-  fedisplacementmap: 'feDisplacementMap',
-  fedistantlight: 'feDistantLight',
-  fedropshadow: 'feDropShadow',
-  feflood: 'feFlood',
-  fefunca: 'feFuncA',
-  fefuncb: 'feFuncB',
-  fefuncg: 'feFuncG',
-  fefuncr: 'feFuncR',
-  fegaussianblur: 'feGaussianBlur',
-  feimage: 'feImage',
-  femerge: 'feMerge',
-  femergenode: 'feMergeNode',
-  femorphology: 'feMorphology',
-  feoffset: 'feOffset',
-  fepointlight: 'fePointLight',
-  fespecularlighting: 'feSpecularLighting',
-  fespotlight: 'feSpotLight',
-  fetile: 'feTile',
-  feturbulence: 'feTurbulence',
-  filter: 'filter',
-  font: 'font',
-  'font-face': 'fontFace',
-  'font-face-format': 'fontFaceFormat',
-  'font-face-name': 'fontFaceName',
-  'font-face-src': 'fontFaceSrc',
-  'font-face-uri': 'fontFaceUri',
-  foreignobject: 'foreignObject',
-  g: 'g',
-  glyph: 'glyph',
-  glyphref: 'glyphRef',
-  hatch: 'hatch',
-  hatchpath: 'hatchpath',
-  hkern: 'hkern',
-  iframe: 'iframe',
-  image: 'image',
-  line: 'line',
-  lineargradient: 'linearGradient',
-  marker: 'marker',
-  mask: 'mask',
-  mesh: 'mesh',
-  meshgradient: 'meshgradient',
-  meshpatch: 'meshpatch',
-  meshrow: 'meshrow',
-  metadata: 'metadata',
-  'missing-glyph': 'missingGlyph',
-  mpath: 'mpath',
-  path: 'path',
-  pattern: 'pattern',
-  polygon: 'polygon',
-  polyline: 'polyline',
-  radialgradient: 'radialGradient',
-  rect: 'rect',
-  script: 'script',
-  set: 'set',
-  solidcolor: 'solidcolor',
-  stop: 'stop',
-  style: 'style',
-  svg: 'svg',
-  switch: 'switch',
-  symbol: 'symbol',
-  text: 'text',
-  textpath: 'textPath',
-  title: 'title',
-  tref: 'tref',
-  tspan: 'tspan',
-  unknown: 'unknown',
-  use: 'use',
-  video: 'video',
-  view: 'view',
-  vkern: 'vkern'
-}
+  a: "a",
+  altglyph: "altGlyph",
+  altglyphdef: "altGlyphDef",
+  altglyphitem: "altGlyphItem",
+  animate: "animate",
+  animatecolor: "animateColor",
+  animatemotion: "animateMotion",
+  animatetransform: "animateTransform",
+  audio: "audio",
+  canvas: "canvas",
+  circle: "circle",
+  clippath: "clipPath",
+  "color-profile": "colorProfile",
+  cursor: "cursor",
+  defs: "defs",
+  desc: "desc",
+  discard: "discard",
+  ellipse: "ellipse",
+  feblend: "feBlend",
+  fecolormatrix: "feColorMatrix",
+  fecomponenttransfer: "feComponentTransfer",
+  fecomposite: "feComposite",
+  feconvolvematrix: "feConvolveMatrix",
+  fediffuselighting: "feDiffuseLighting",
+  fedisplacementmap: "feDisplacementMap",
+  fedistantlight: "feDistantLight",
+  fedropshadow: "feDropShadow",
+  feflood: "feFlood",
+  fefunca: "feFuncA",
+  fefuncb: "feFuncB",
+  fefuncg: "feFuncG",
+  fefuncr: "feFuncR",
+  fegaussianblur: "feGaussianBlur",
+  feimage: "feImage",
+  femerge: "feMerge",
+  femergenode: "feMergeNode",
+  femorphology: "feMorphology",
+  feoffset: "feOffset",
+  fepointlight: "fePointLight",
+  fespecularlighting: "feSpecularLighting",
+  fespotlight: "feSpotLight",
+  fetile: "feTile",
+  feturbulence: "feTurbulence",
+  filter: "filter",
+  font: "font",
+  "font-face": "fontFace",
+  "font-face-format": "fontFaceFormat",
+  "font-face-name": "fontFaceName",
+  "font-face-src": "fontFaceSrc",
+  "font-face-uri": "fontFaceUri",
+  foreignobject: "foreignObject",
+  g: "g",
+  glyph: "glyph",
+  glyphref: "glyphRef",
+  hatch: "hatch",
+  hatchpath: "hatchpath",
+  hkern: "hkern",
+  iframe: "iframe",
+  image: "image",
+  line: "line",
+  lineargradient: "linearGradient",
+  marker: "marker",
+  mask: "mask",
+  mesh: "mesh",
+  meshgradient: "meshgradient",
+  meshpatch: "meshpatch",
+  meshrow: "meshrow",
+  metadata: "metadata",
+  "missing-glyph": "missingGlyph",
+  mpath: "mpath",
+  path: "path",
+  pattern: "pattern",
+  polygon: "polygon",
+  polyline: "polyline",
+  radialgradient: "radialGradient",
+  rect: "rect",
+  script: "script",
+  set: "set",
+  solidcolor: "solidcolor",
+  stop: "stop",
+  style: "style",
+  svg: "svg",
+  switch: "switch",
+  symbol: "symbol",
+  text: "text",
+  textpath: "textPath",
+  title: "title",
+  tref: "tref",
+  tspan: "tspan",
+  unknown: "unknown",
+  use: "use",
+  video: "video",
+  view: "view",
+  vkern: "vkern",
+};
 
 /**
  * Iterates over elements of object invokes iteratee for each element
@@ -126,26 +126,28 @@ const ELEMENT_TAG_NAME_MAPPING = {
  * @param {function} iteratee   Callback function called in iterative processing
  * @param {any}      context    This arg (aka Context)
  */
-function eachObj(obj: object, iteratee, context?: unknown) {
+function eachObj(obj: any, iteratee: any, context?: unknown) {
   Object.keys(obj).forEach((key) => {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      iteratee.call(context || obj, key, obj[key])
+      iteratee.call(context || obj, key, obj[key]);
     }
-  })
+  });
 }
 
 // Populate property map with ReactJS's attribute and property mappings
 // TODO handle/use .Properties value eg: MUST_USE_PROPERTY is not HTML attr
-function mappingAttributesFromReactConfig(config) {
-  eachObj(config.Properties, function (propname) {
-    const mapFrom = config.DOMAttributeNames[propname] || propname.toLowerCase()
+function mappingAttributesFromReactConfig(config: any) {
+  eachObj(config.Properties, function (propname: string) {
+    const mapFrom =
+      config.DOMAttributeNames[propname] || propname.toLowerCase();
 
-    if (!ATTRIBUTE_MAPPING[mapFrom]) ATTRIBUTE_MAPPING[mapFrom] = propname
-  })
+    if (!ATTRIBUTE_MAPPING[mapFrom as keyof typeof ATTRIBUTE_MAPPING])
+      ATTRIBUTE_MAPPING[mapFrom as keyof typeof ATTRIBUTE_MAPPING] = propname;
+  });
 }
 
-mappingAttributesFromReactConfig(HTMLDOMPropertyConfig)
-mappingAttributesFromReactConfig(SVGDOMPropertyConfig)
+mappingAttributesFromReactConfig(HTMLDOMPropertyConfig);
+mappingAttributesFromReactConfig(SVGDOMPropertyConfig);
 
 /**
  * Convert tag name to tag name suitable for JSX.
@@ -153,14 +155,15 @@ mappingAttributesFromReactConfig(SVGDOMPropertyConfig)
  * @param  {string} tagName  String of tag name
  * @return {string}
  */
-function jsxTagName(tagName) {
-  let name = tagName.toLowerCase()
+function jsxTagName(tagName: string) {
+  let name = tagName.toLowerCase();
 
   if (Object.prototype.hasOwnProperty.call(ELEMENT_TAG_NAME_MAPPING, name)) {
-    name = ELEMENT_TAG_NAME_MAPPING[name]
+    name =
+      ELEMENT_TAG_NAME_MAPPING[name as keyof typeof ELEMENT_TAG_NAME_MAPPING];
   }
 
-  return name
+  return name;
 }
 
 /**
@@ -172,23 +175,23 @@ function jsxTagName(tagName) {
  * @param {number} times   Number of times to repeat string. Integer.
  * @see http://jsperf.com/string-repeater/2
  */
-function repeatString(string, times) {
+function repeatString(string: string, times: number) {
   if (times === 1) {
-    return string
+    return string;
   }
   if (times < 0) {
-    throw new Error()
+    throw new Error();
   }
-  let repeated = ''
+  let repeated = "";
   while (times) {
     if (times & 1) {
-      repeated += string
+      repeated += string;
     }
     if ((times >>= 1)) {
-      string += string
+      string += string;
     }
   }
-  return repeated
+  return repeated;
 }
 
 /**
@@ -198,8 +201,8 @@ function repeatString(string, times) {
  * @param {string} needle   String to search for
  * @return {boolean}
  */
-function endsWith(haystack, needle) {
-  return haystack.slice(-needle.length) === needle
+function endsWith(haystack: string, needle: string) {
+  return haystack.slice(-needle.length) === needle;
 }
 
 /**
@@ -210,35 +213,37 @@ function endsWith(haystack, needle) {
  * @param {string} needle   String to search for
  * @return {string}
  */
-function trimEnd(haystack, needle) {
-  return endsWith(haystack, needle) ? haystack.slice(0, -needle.length) : haystack
+function trimEnd(haystack: string, needle: string) {
+  return endsWith(haystack, needle)
+    ? haystack.slice(0, -needle.length)
+    : haystack;
 }
 
 /**
  * Convert a hyphenated string to camelCase.
  */
-function hyphenToCamelCase(string) {
+function hyphenToCamelCase(string: string) {
   return string.replace(/-(.)/g, function (_, chr) {
-    return chr.toUpperCase()
-  })
+    return chr.toUpperCase();
+  });
 }
 
 /**
  * Determines if the specified string consists entirely of whitespace.
  */
-function isEmpty(string) {
-  return !/[^\s]/.test(string)
+function isEmpty(string: string) {
+  return !/[^\s]/.test(string);
 }
 
 /**
  * Determines if the specified string consists entirely of numeric characters.
  */
-function isNumeric(input) {
+function isNumeric(input: any) {
   return (
     input !== undefined &&
     input !== null &&
-    (typeof input === 'number' || parseInt(input, 10) == input)
-  )
+    (typeof input === "number" || parseInt(input, 10) == input)
+  );
 }
 
 // let createElement
@@ -251,12 +256,12 @@ function isNumeric(input) {
 // Node.js-like environment, use jsdom.
 // const jsdom = require('jsdom-no-contextify').jsdom
 // const window = jsdom().defaultView
-const createElement = function (tag) {
-  return window.document.createElement(tag)
-}
+const createElement = function (tag: any) {
+  return window.document.createElement(tag);
+};
 // }
 
-const tempEl = createElement('div')
+const tempEl = createElement("div");
 /**
  * Escapes special characters by converting them to their escaped equivalent
  * (eg. "<" to "&lt;"). Only escapes characters that absolutely must be escaped.
@@ -264,33 +269,33 @@ const tempEl = createElement('div')
  * @param {string} value
  * @return {string}
  */
-function escapeSpecialChars(value) {
+function escapeSpecialChars(value: string) {
   // Uses this One Weird Trick to escape text - Raw text inserted as textContent
   // will have its escaped version in innerHTML.
-  tempEl.textContent = value
-  return tempEl.innerHTML
+  tempEl.textContent = value;
+  return tempEl.innerHTML;
 }
 
 class HTMLtoJSX {
-  config: any
-  output: any
-  level: any
-  _inPreTag: any
+  config: any;
+  output: any;
+  level: any;
+  _inPreTag: any;
 
-  constructor(config) {
-    this.config = config || {}
+  constructor(config: any) {
+    this.config = config || {};
 
     if (!this.config.indent) {
-      this.config.indent = '  '
+      this.config.indent = "  ";
     }
   }
   /**
    * Reset the internal state of the converter
    */
   public reset() {
-    this.output = ''
-    this.level = 0
-    this._inPreTag = false
+    this.output = "";
+    this.level = 0;
+    this._inPreTag = false;
   }
   /**
    * Main entry point to the converter. Given the specified HTML, returns a
@@ -298,27 +303,31 @@ class HTMLtoJSX {
    * @param {string} html HTML to convert
    * @return {string} JSX
    */
-  public convert(html) {
-    this.reset()
+  public convert(html: string) {
+    this.reset();
 
-    const containerEl = createElement('div')
-    containerEl.innerHTML = '\n' + this._cleanInput(html) + '\n'
+    const containerEl = createElement("div");
+    containerEl.innerHTML = "\n" + this._cleanInput(html) + "\n";
 
     if (this._onlyOneTopLevel(containerEl)) {
       // Only one top-level element, the component can return it directly
       // No need to actually visit the container element
-      this._traverse(containerEl)
+      this._traverse(containerEl);
     } else {
       // More than one top-level element, need to wrap the whole thing in a
       // container.
-      this.output += this.config.indent + this.config.indent + this.config.indent
-      this.level++
-      this._visit(containerEl)
+      this.output +=
+        this.config.indent + this.config.indent + this.config.indent;
+      this.level++;
+      this._visit(containerEl);
     }
-    this.output = this.output.trim() + '\n'
+    this.output = this.output.trim() + "\n";
 
-    this.output = this._removeJSXClassIndention(this.output, this.config.indent)
-    return this.output
+    this.output = this._removeJSXClassIndention(
+      this.output,
+      this.config.indent
+    );
+    return this.output;
   }
 
   /**
@@ -328,13 +337,13 @@ class HTMLtoJSX {
    * @param {string} html HTML to clean
    * @return {string} Cleaned HTML
    */
-  public _cleanInput(html) {
+  public _cleanInput(html: string) {
     // Remove unnecessary whitespace
-    html = html.trim()
+    html = html.trim();
     // Ugly method to strip script tags. They can wreak havoc on the DOM nodes
     // so let's not even put them in the DOM.
-    html = html.replace(/<script([\s\S]*?)<\/script>/g, '')
-    return html
+    html = html.replace(/<script([\s\S]*?)<\/script>/g, "");
+    return html;
   }
 
   /**
@@ -344,32 +353,35 @@ class HTMLtoJSX {
    * @param {DOMElement} containerEl Container element
    * @return {boolean}
    */
-  _onlyOneTopLevel(containerEl) {
+  _onlyOneTopLevel(containerEl: any) {
     // Only a single child element
     if (
       containerEl.childNodes.length === 1 &&
       containerEl.childNodes[0].nodeType === NODE_TYPE.ELEMENT
     ) {
-      return true
+      return true;
     }
     // Only one element, and all other children are whitespace
-    let foundElement = false
+    let foundElement = false;
     for (let i = 0, count = containerEl.childNodes.length; i < count; i++) {
-      const child = containerEl.childNodes[i]
+      const child = containerEl.childNodes[i];
       if (child.nodeType === NODE_TYPE.ELEMENT) {
         if (foundElement) {
           // Encountered an element after already encountering another one
           // Therefore, more than one element at root level
-          return false
+          return false;
         } else {
-          foundElement = true
+          foundElement = true;
         }
-      } else if (child.nodeType === NODE_TYPE.TEXT && !isEmpty(child.textContent)) {
+      } else if (
+        child.nodeType === NODE_TYPE.TEXT &&
+        !isEmpty(child.textContent)
+      ) {
         // Contains text content
-        return false
+        return false;
       }
     }
-    return true
+    return true;
   }
 
   /**
@@ -379,7 +391,7 @@ class HTMLtoJSX {
    * @return {string}
    */
   _getIndentedNewline() {
-    return '\n' + repeatString(this.config.indent, this.level + 2)
+    return "\n" + repeatString(this.config.indent, this.level + 2);
   }
 
   /**
@@ -387,10 +399,10 @@ class HTMLtoJSX {
    *
    * @param {Node} node
    */
-  public _visit(node) {
-    this._beginVisit(node)
-    this._traverse(node)
-    this._endVisit(node)
+  public _visit(node: Node) {
+    this._beginVisit(node);
+    this._traverse(node);
+    this._endVisit(node);
   }
 
   /**
@@ -398,12 +410,12 @@ class HTMLtoJSX {
    *
    * @param {Node} node
    */
-  public _traverse(node) {
-    this.level++
+  public _traverse(node: Node) {
+    this.level++;
     for (let i = 0, count = node.childNodes.length; i < count; i++) {
-      this._visit(node.childNodes[i])
+      this._visit(node.childNodes[i]);
     }
-    this.level--
+    this.level--;
   }
 
   /**
@@ -411,22 +423,22 @@ class HTMLtoJSX {
    *
    * @param {Node} node
    */
-  _beginVisit(node) {
+  _beginVisit(node: Node) {
     switch (node.nodeType) {
       case NODE_TYPE.ELEMENT:
-        this._beginVisitElement(node)
-        break
+        this._beginVisitElement(node);
+        break;
 
       case NODE_TYPE.TEXT:
-        this._visitText(node)
-        break
+        this._visitText(node);
+        break;
 
       case NODE_TYPE.COMMENT:
-        this._visitComment(node)
-        break
+        this._visitComment(node);
+        break;
 
       default:
-        console.warn('Unrecognised node type: ' + node.nodeType)
+        console.warn("Unrecognised node type: " + node.nodeType);
     }
   }
 
@@ -435,15 +447,15 @@ class HTMLtoJSX {
    *
    * @param {Node} node
    */
-  _endVisit(node) {
+  _endVisit(node: Node) {
     switch (node.nodeType) {
       case NODE_TYPE.ELEMENT:
-        this._endVisitElement(node)
-        break
+        this._endVisitElement(node);
+        break;
       // No ending tags required for these types
       case NODE_TYPE.TEXT:
       case NODE_TYPE.COMMENT:
-        break
+        break;
     }
   }
 
@@ -452,33 +464,35 @@ class HTMLtoJSX {
    *
    * @param {DOMElement} node
    */
-  _beginVisitElement(node) {
-    const tagName = jsxTagName(node.tagName)
-    const attributes: string[] = []
+  _beginVisitElement(node: any) {
+    const tagName = jsxTagName(node.tagName);
+    const attributes: string[] = [];
     for (let i = 0, count = node.attributes.length; i < count; i++) {
-      attributes.push(this._getElementAttribute(node, node.attributes[i]))
+      attributes.push(this._getElementAttribute(node, node.attributes[i]));
     }
 
-    if (tagName === 'textarea') {
+    if (tagName === "textarea") {
       // Hax: textareas need their inner text moved to a "defaultValue" attribute.
-      attributes.push('defaultValue={' + JSON.stringify(node.value) + '}')
+      attributes.push("defaultValue={" + JSON.stringify(node.value) + "}");
     }
-    if (tagName === 'style') {
+    if (tagName === "style") {
       // Hax: style tag contents need to be dangerously set due to liberal curly brace usage
       attributes.push(
-        'dangerouslySetInnerHTML={{__html: ' + JSON.stringify(node.textContent) + ' }}'
-      )
+        "dangerouslySetInnerHTML={{__html: " +
+          JSON.stringify(node.textContent) +
+          " }}"
+      );
     }
-    if (tagName === 'pre') {
-      this._inPreTag = true
+    if (tagName === "pre") {
+      this._inPreTag = true;
     }
 
-    this.output += '<' + tagName
+    this.output += "<" + tagName;
     if (attributes.length > 0) {
-      this.output += ' ' + attributes.join(' ')
+      this.output += " " + attributes.join(" ");
     }
     if (!this._isSelfClosing(node)) {
-      this.output += '>'
+      this.output += ">";
     }
   }
 
@@ -487,19 +501,19 @@ class HTMLtoJSX {
    *
    * @param {Node} node
    */
-  _endVisitElement(node) {
-    const tagName = jsxTagName(node.tagName)
+  _endVisitElement(node: any) {
+    const tagName = jsxTagName(node.tagName);
     // De-indent a bit
     // TODO: It's inefficient to do it this way :/
-    this.output = trimEnd(this.output, this.config.indent)
+    this.output = trimEnd(this.output, this.config.indent);
     if (this._isSelfClosing(node)) {
-      this.output += ' />'
+      this.output += " />";
     } else {
-      this.output += '</' + tagName + '>'
+      this.output += "</" + tagName + ">";
     }
 
-    if (tagName === 'pre') {
-      this._inPreTag = false
+    if (tagName === "pre") {
+      this._inPreTag = false;
     }
   }
   /**
@@ -509,11 +523,11 @@ class HTMLtoJSX {
    * @param {Node} node
    * @return {boolean}
    */
-  _isSelfClosing(node) {
-    const tagName = jsxTagName(node.tagName)
+  _isSelfClosing(node: any) {
+    const tagName = jsxTagName(node.tagName);
     // If it has children, it's not self-closing
     // Exception: All children of a textarea are moved to a "defaultValue" attribute, style attributes are dangerously set.
-    return !node.firstChild || tagName === 'textarea' || tagName === 'style'
+    return !node.firstChild || tagName === "textarea" || tagName === "style";
   }
 
   /**
@@ -521,34 +535,36 @@ class HTMLtoJSX {
    *
    * @param {TextNode} node
    */
-  _visitText(node) {
-    const parentTag = node.parentNode && jsxTagName(node.parentNode.tagName)
-    if (parentTag === 'textarea' || parentTag === 'style') {
+  _visitText(node: any) {
+    const parentTag = node.parentNode && jsxTagName(node.parentNode.tagName);
+    if (parentTag === "textarea" || parentTag === "style") {
       // Ignore text content of textareas and styles, as it will have already been moved
       // to a "defaultValue" attribute and "dangerouslySetInnerHTML" attribute respectively.
-      return
+      return;
     }
 
-    let text = escapeSpecialChars(node.textContent)
+    let text = escapeSpecialChars(node.textContent);
 
     if (this._inPreTag) {
       // If this text is contained within a <pre>, we need to ensure the JSX
       // whitespace coalescing rules don't eat the whitespace. This means
       // wrapping newlines and sequences of two or more spaces in letiables.
-      text = text.replace(/\r/g, '').replace(/( {2,}|\n|\t|\{|\})/g, function (whitespace) {
-        return '{' + JSON.stringify(whitespace) + '}'
-      })
+      text = text
+        .replace(/\r/g, "")
+        .replace(/( {2,}|\n|\t|\{|\})/g, function (whitespace: any) {
+          return "{" + JSON.stringify(whitespace) + "}";
+        });
     } else {
       // Handle any curly braces.
-      text = text.replace(/(\{|\})/g, function (brace) {
-        return "{'" + brace + "'}"
-      })
+      text = text.replace(/(\{|\})/g, function (brace: string) {
+        return "{'" + brace + "'}";
+      });
       // If there's a newline in the text, adjust the indent level
-      if (text.indexOf('\n') > -1) {
-        text = text.replace(/\n\s*/g, this._getIndentedNewline())
+      if (text.indexOf("\n") > -1) {
+        text = text.replace(/\n\s*/g, this._getIndentedNewline());
       }
     }
-    this.output += text
+    this.output += text;
   }
 
   /**
@@ -556,8 +572,8 @@ class HTMLtoJSX {
    *
    * @param {Text} node
    */
-  _visitComment(node) {
-    this.output += '{/*' + node.textContent.replace('*/', '* /') + '*/}'
+  _visitComment(node: any) {
+    this.output += "{/*" + node.textContent.replace("*/", "* /") + "*/}";
   }
 
   /**
@@ -567,25 +583,30 @@ class HTMLtoJSX {
    * @param {object}     attribute
    * @return {string}
    */
-  _getElementAttribute(node, attribute) {
-    const tagName = jsxTagName(node.tagName)
+  _getElementAttribute(node: any, attribute: any) {
+    const tagName = jsxTagName(
+      node.tagName
+    ) as keyof typeof ELEMENT_ATTRIBUTE_MAPPING;
     const name =
-      (ELEMENT_ATTRIBUTE_MAPPING[tagName] && ELEMENT_ATTRIBUTE_MAPPING[tagName][attribute.name]) ||
-      ATTRIBUTE_MAPPING[attribute.name] ||
-      attribute.name
-    let result = name
+      (ELEMENT_ATTRIBUTE_MAPPING[tagName] &&
+        ELEMENT_ATTRIBUTE_MAPPING[tagName][
+          attribute.name as keyof typeof ELEMENT_ATTRIBUTE_MAPPING.input
+        ]) ||
+      ATTRIBUTE_MAPPING[attribute.name as keyof typeof ATTRIBUTE_MAPPING] ||
+      attribute.name;
+    let result = name;
     switch (attribute.name) {
-      case 'style':
-        return this._getStyleAttribute(attribute.value)
+      case "style":
+        return this._getStyleAttribute(attribute.value);
       default:
         if (isNumeric(attribute.value)) {
-          result += '={' + attribute.value + '}'
+          result += "={" + attribute.value + "}";
         } else if (attribute.value.length > 0) {
-          result += '="' + attribute.value.replace(/"/gm, '&quot;') + '"'
-        } else if (attribute.value.length === 0 && attribute.name === 'alt') {
-          result += '=""'
+          result += '="' + attribute.value.replace(/"/gm, "&quot;") + '"';
+        } else if (attribute.value.length === 0 && attribute.name === "alt") {
+          result += '=""';
         }
-        return result
+        return result;
     }
   }
 
@@ -595,9 +616,9 @@ class HTMLtoJSX {
    * @param {string} styles
    * @return {string}
    */
-  _getStyleAttribute(styles) {
-    const jsxStyles = new StyleParser(styles).toJSXString()
-    return 'style={{' + jsxStyles + '}}'
+  _getStyleAttribute(styles: any) {
+    const jsxStyles = new StyleParser(styles).toJSXString();
+    return "style={{" + jsxStyles + "}}";
   }
 
   /**
@@ -608,17 +629,17 @@ class HTMLtoJSX {
    * @param {string} indent Configured indention
    * @return {string} JSX output wihtout class-level indention
    */
-  _removeJSXClassIndention(output, indent) {
-    const classIndention = new RegExp('\\n' + indent + indent + indent, 'g')
-    return output.replace(classIndention, '\n')
+  _removeJSXClassIndention(output: any, indent: any) {
+    const classIndention = new RegExp("\\n" + indent + indent + indent, "g");
+    return output.replace(classIndention, "\n");
   }
 }
 
 export class StyleParser {
-  private styles: { [key: string]: string } = {}
+  private styles: { [key: string]: string } = {};
 
   constructor(rawStyle: string) {
-    this.parse(rawStyle)
+    this.parse(rawStyle);
   }
 
   /**
@@ -626,17 +647,17 @@ export class StyleParser {
    * @param {string} rawStyle Raw style attribute
    */
   private parse(rawStyle: string): void {
-    rawStyle.split(';').forEach((style) => {
-      style = style.trim()
-      const firstColon = style.indexOf(':')
-      let key = style.substr(0, firstColon)
-      const value = style.substr(firstColon + 1).trim()
-      if (key !== '') {
+    rawStyle.split(";").forEach((style) => {
+      style = style.trim();
+      const firstColon = style.indexOf(":");
+      let key = style.substr(0, firstColon);
+      const value = style.substr(firstColon + 1).trim();
+      if (key !== "") {
         // Style key should be case insensitive
-        key = key.toLowerCase()
-        this.styles[key] = value
+        key = key.toLowerCase();
+        this.styles[key] = value;
       }
-    })
+    });
   }
 
   /**
@@ -646,11 +667,11 @@ export class StyleParser {
    * @return {string}
    */
   public toJSXString(): string {
-    const output: string[] = []
+    const output: string[] = [];
     Object.entries(this.styles).forEach(([key, value]) =>
-      output.push(this.toJSXKey(key) + ': ' + this.toJSXValue(value))
-    )
-    return output.join(', ')
+      output.push(this.toJSXKey(key) + ": " + this.toJSXValue(value))
+    );
+    return output.join(", ");
   }
 
   /**
@@ -662,9 +683,9 @@ export class StyleParser {
   private toJSXKey(key: string): string {
     // Don't capitalize -ms- prefix
     if (/^-ms-/.test(key)) {
-      key = key.substr(1)
+      key = key.substr(1);
     }
-    return hyphenToCamelCase(key)
+    return hyphenToCamelCase(key);
   }
 
   /**
@@ -676,12 +697,12 @@ export class StyleParser {
   private toJSXValue(value: string): string {
     if (isNumeric(value)) {
       // If numeric, no quotes
-      return value
+      return value;
     } else {
       // Probably a string, wrap it in quotes
-      return "'" + value.replace(/'/g, '"') + "'"
+      return "'" + value.replace(/'/g, '"') + "'";
     }
   }
 }
 
-export default HTMLtoJSX
+export default HTMLtoJSX;

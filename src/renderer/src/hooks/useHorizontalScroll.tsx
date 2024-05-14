@@ -4,7 +4,7 @@ export function useHorizontalScroll() {
   const elRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const el = elRef.current
-    const onWheel = (e) => {
+    const onWheel = (e: WheelEvent) => {
       if (e.deltaY == 0) return
       e.preventDefault()
       !!el &&

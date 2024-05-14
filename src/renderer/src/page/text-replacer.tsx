@@ -57,8 +57,8 @@ const TextReplacer = () => {
     replaceArgs.forEach((replaceArg) => {
       const { all, pattern, replacement } = replaceArg
       if (all) {
-        v = v.replaceAll(pattern, replacement)
-        c += `.replaceAll('${pattern}', '${replacement}')`
+        v = v.replace(new RegExp(pattern, 'g'), replacement)
+        c += `.replace(new RegExp('${pattern}', 'g'), '${replacement}')`
       } else {
         v = v.replace(pattern, replacement)
         c += `.replace('${pattern}', '${replacement}')`

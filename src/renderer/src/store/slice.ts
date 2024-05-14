@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { EXTENSION_KEY } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY } from '@renderer/models/types'
 import { uniq } from 'lodash-es'
 
 export interface AppState {
@@ -23,7 +23,7 @@ const initialState: AppState = {
 
 export const saveStore = (state: Partial<AppState>) => {
   try {
-    Object.keys(state).forEach((key) => {
+    Object.keys(state).forEach((key : keyof Partial<AppState>) => {
       if (!state[key]) {
         window.electron.store.set(key, 'deleted')
       } else {
@@ -135,7 +135,7 @@ export const appSlice = createSlice({
       })
     },
     syncStore: (state) => {
-      Object.keys(state).forEach((key) => {
+      Object.keys(state).forEach((key: keyof Partial<AppState>) => {
         const value = window.electron.store.get(key)
         if (value && value !== 'deleted') {
           state[key] = window.electron.store.get(key)
