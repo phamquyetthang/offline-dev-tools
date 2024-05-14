@@ -7,7 +7,7 @@ import {
   CommandList
 } from '@lib/components/ui/command'
 import { Input } from '@lib/components/ui/input'
-import { EXTENSION_KEY } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY } from '@renderer/models/types'
 import { Search, Wrench } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Icon from '../components/icon'

@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { RootState } from '.'
-import { EXTENSION_KEY, IExtension } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY, IExtension } from '@renderer/models/types'
 import { EXTENSIONS } from '@renderer/models/extensions'
 
 const getExtensions = (extensions: EXTENSION_KEY[]): IExtension[] =>

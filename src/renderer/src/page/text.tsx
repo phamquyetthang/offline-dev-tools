@@ -1,5 +1,5 @@
 import GroupExtensions from '@renderer/components/components/group-extensions'
-import { CATEGORIES_KEY } from '@renderer/models/extensions.d'
+import { CATEGORIES_KEY } from '@renderer/models/types'
 import { CATEGORIES, EXTENSIONS } from '@renderer/models/extensions'
 
 const Text = () => {

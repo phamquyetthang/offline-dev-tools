@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { CATEGORIES_KEY, EXTENSION_KEY, ICategory, IExtension } from '@renderer/models/extensions.d'
+import { CATEGORIES_KEY, EXTENSION_KEY, ICategory, IExtension } from '@renderer/models/types'
 import { SiMongodb } from 'react-icons/si'
 
 import All from '@renderer/page/all'

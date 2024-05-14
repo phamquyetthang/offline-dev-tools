@@ -1,5 +1,5 @@
 import Generator from '@renderer/components/layouts/generator'
-import { EXTENSION_KEY } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY } from '@renderer/models/types'
 import { faker } from '@faker-js/faker'
 
 const ObjectIdGenerator = () => {

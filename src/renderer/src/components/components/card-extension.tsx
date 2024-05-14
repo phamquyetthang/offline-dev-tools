@@ -3,7 +3,7 @@ import { Pin, PinOff, Wrench } from 'lucide-react'
 import Icon from './icon'
 import { useAppDispatch, useAppSelector } from '@renderer/store'
 import { pinAction, setRecentExtensions } from '@renderer/store/slice'
-import { EXTENSION_KEY, IExtension } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY, IExtension } from '@renderer/models/types'
 
 interface IProps extends Omit<IExtension, 'category' | 'page'> {
   extensionKey: EXTENSION_KEY

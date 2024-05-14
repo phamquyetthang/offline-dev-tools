@@ -9,7 +9,7 @@ import {
   SelectValue
 } from '@lib/components/ui/select'
 import { EXTENSIONS_GENERATORS } from '@renderer/models/extensions'
-import { EXTENSION_KEY, IExtension } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY, IExtension } from '@renderer/models/types'
 import { useMemo, useState } from 'react'
 import CopyButton from '../components/copy-button'
 import CopyField from '../components/copy-field'

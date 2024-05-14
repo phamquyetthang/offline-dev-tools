@@ -1,5 +1,5 @@
 import { TabsTrigger } from '@lib/components/ui/tabs'
-import { EXTENSION_KEY, IExtension } from '@renderer/models/extensions.d'
+import { EXTENSION_KEY, IExtension } from '@renderer/models/types'
 import { useAppDispatch } from '@renderer/store'
 import { closeTag, moveToSecondTab } from '@renderer/store/slice'
 import clsx from 'clsx'
