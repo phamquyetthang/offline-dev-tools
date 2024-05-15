@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@lib/compo
 import { Checkbox } from '@lib/components/ui/checkbox'
 import { Input } from '@lib/components/ui/input'
 import { Textarea } from '@lib/components/ui/textarea'
-import CopyButton from '@renderer/components/components/copy-button'
+import CopyButton from '@app/components/components/copy-button'
 import { ArrowUpFromLine, Plus, Trash } from 'lucide-react'
 import { ChangeEvent, useState } from 'react'
 import Highlighter from 'react-highlight-words'

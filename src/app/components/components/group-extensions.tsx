@@ -1,4 +1,4 @@
-import { IExtension } from '@renderer/models/types'
+import { IExtension } from '@app/models/types'
 import CardExtension from './card-extension'
 
 interface IProps {

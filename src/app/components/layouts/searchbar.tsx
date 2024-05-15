@@ -7,13 +7,13 @@ import {
   CommandList
 } from '@lib/components/ui/command'
 import { Input } from '@lib/components/ui/input'
-import { EXTENSION_KEY } from '@renderer/models/types'
+import { EXTENSION_KEY } from '@app/models/types'
 import { Search, Wrench } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Icon from '../components/icon'
-import { useAppDispatch } from '@renderer/store'
-import { setRecentExtensions } from '@renderer/store/slice'
-import { EXTENSIONS } from '@renderer/models/extensions'
+import { useAppDispatch } from '@app/store'
+import { setRecentExtensions } from '@app/store/slice'
+import { EXTENSIONS } from '@app/models/extensions'
 
 const SearchBar = () => {
   const [open, setOpen] = useState(false)

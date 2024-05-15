@@ -1,9 +1,9 @@
 import { Card, CardContent } from '@lib/components/ui/card'
 import { Pin, PinOff, Wrench } from 'lucide-react'
 import Icon from './icon'
-import { useAppDispatch, useAppSelector } from '@renderer/store'
-import { pinAction, setRecentExtensions } from '@renderer/store/slice'
-import { EXTENSION_KEY, IExtension } from '@renderer/models/types'
+import { useAppDispatch, useAppSelector } from '@app/store'
+import { pinAction, setRecentExtensions } from '@app/store/slice'
+import { EXTENSION_KEY, IExtension } from '@app/models/types'
 
 interface IProps extends Omit<IExtension, 'category' | 'page'> {
   extensionKey: EXTENSION_KEY

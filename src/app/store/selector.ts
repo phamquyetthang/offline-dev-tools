@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { RootState } from '.'
-import { EXTENSION_KEY, IExtension } from '@renderer/models/types'
-import { EXTENSIONS } from '@renderer/models/extensions'
+import { EXTENSION_KEY, IExtension } from '@app/models/types'
+import { EXTENSIONS } from '@app/models/extensions'
 
 const getExtensions = (extensions: EXTENSION_KEY[]): IExtension[] =>
   (extensions || []).reduce((pre: IExtension[] = [], cur) => {

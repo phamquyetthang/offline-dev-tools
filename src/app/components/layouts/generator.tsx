@@ -8,13 +8,13 @@ import {
   SelectTrigger,
   SelectValue
 } from '@lib/components/ui/select'
-import { EXTENSIONS_GENERATORS } from '@renderer/models/extensions'
-import { EXTENSION_KEY, IExtension } from '@renderer/models/types'
+import { EXTENSIONS_GENERATORS } from '@app/models/extensions'
+import { EXTENSION_KEY, IExtension } from '@app/models/types'
 import { useMemo, useState } from 'react'
 import CopyButton from '../components/copy-button'
 import CopyField from '../components/copy-field'
-import { useAppDispatch } from '@renderer/store'
-import { setRecentExtensions } from '@renderer/store/slice'
+import { useAppDispatch } from '@app/store'
+import { setRecentExtensions } from '@app/store/slice'
 
 interface GeneratorProps {
   extensionKey: string

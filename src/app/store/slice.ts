@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { EXTENSION_KEY } from '@renderer/models/types'
+import { EXTENSION_KEY } from '@app/models/types'
 import { uniq } from 'lodash-es'
 
 export interface AppState {

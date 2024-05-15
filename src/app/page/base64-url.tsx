@@ -3,8 +3,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@lib/compo
 import { Textarea } from '@lib/components/ui/textarea'
 import { ArrowUpFromLine } from 'lucide-react'
 import { useState } from 'react'
-import CopyButton from '@renderer/components/components/copy-button'
-import { base64UrlDecode, base64UrlEncode } from '@renderer/utils/base64url'
+import CopyButton from '@app/components/components/copy-button'
+import { base64UrlDecode, base64UrlEncode } from '@app/utils/base64url'
 
 const Base64Url = () => {
   const [encode, setEncode] = useState('')

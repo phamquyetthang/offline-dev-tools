@@ -1,5 +1,5 @@
-import TransformLayout from '@renderer/components/layouts/transform'
-import HTMLtoJSX from '@renderer/utils/html-to-jsx'
+import TransformLayout from '@app/components/layouts/transform'
+import HTMLtoJSX from '@app/utils/html-to-jsx'
 import { useCallback, useState } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import parse from 'html-react-parser'

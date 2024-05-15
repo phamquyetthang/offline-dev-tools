@@ -7,14 +7,14 @@ import {
 } from '@lib/components/ui/tooltip'
 import { Button } from '@lib/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@lib/components/ui/sheet'
-import { CATEGORIES } from '@renderer/models/extensions'
+import { CATEGORIES } from '@app/models/extensions'
 import Icon from '../components/icon'
 import { NavLink } from 'react-router-dom'
 import './sidebar.css'
 import { useTheme } from './theme'
 import { memo } from 'react'
-import { useAppDispatch } from '@renderer/store'
-import { setRecentExtensions } from '@renderer/store/slice'
+import { useAppDispatch } from '@app/store'
+import { setRecentExtensions } from '@app/store/slice'
 
 const SidebarComponent = () => {
   const { setTheme, theme } = useTheme()

@@ -1,7 +1,7 @@
 import { Button } from '@lib/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@lib/components/ui/card'
 import { Textarea } from '@lib/components/ui/textarea'
-import CopyButton from '@renderer/components/components/copy-button'
+import CopyButton from '@app/components/components/copy-button'
 import { Download, ImageUp } from 'lucide-react'
 import { ChangeEvent, useState } from 'react'
 

@@ -1,7 +1,7 @@
-import GroupExtensions from '@renderer/components/components/group-extensions'
-import { EXTENSIONS } from '@renderer/models/extensions'
-import { useAppSelector } from '@renderer/store'
-import { pinedExtensionsSelector, recentExtensionsSelector } from '@renderer/store/selector'
+import GroupExtensions from '@app/components/components/group-extensions'
+import { EXTENSIONS } from '@app/models/extensions'
+import { useAppSelector } from '@app/store'
+import { pinedExtensionsSelector, recentExtensionsSelector } from '@app/store/selector'
 import { memo } from 'react'
 
 const AllExtension = memo(function AllExtensionComponent() {

@@ -26,4 +26,4 @@
  * ```
  */
 
-import "./renderer/src";
+import "./app/index";

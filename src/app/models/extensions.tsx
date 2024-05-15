@@ -1,20 +1,20 @@
 import { lazy } from 'react'
-import { CATEGORIES_KEY, EXTENSION_KEY, ICategory, IExtension } from '@renderer/models/types'
+import { CATEGORIES_KEY, EXTENSION_KEY, ICategory, IExtension } from '@app/models/types'
 import { SiMongodb } from 'react-icons/si'
 
-import All from '@renderer/page/all'
-import EncoderDecoder from '@renderer/page/encoder-decoder'
-import Generators from '@renderer/page/generators'
-import Text from '@renderer/page/text'
+import All from '@app/page/all'
+import EncoderDecoder from '@app/page/encoder-decoder'
+import Generators from '@app/page/generators'
+import Text from '@app/page/text'
 
-const JwtDecoder = lazy(() => import('@renderer/page/jwt-decoder'))
-const Base64Image = lazy(() => import('@renderer/page/base64-image'))
-const Base64Text = lazy(() => import('@renderer/page/base64-text'))
-const TextReplacer = lazy(() => import('@renderer/page/text-replacer'))
-const HTML_JSX = lazy(() => import('@renderer/page/html-jsx'))
-const Base64URL = lazy(() => import('@renderer/page/base64-url'))
-const UuidGenerator = lazy(() => import('@renderer/page/uuid-generator'))
-const ObjectIdGenerator = lazy(() => import('@renderer/page/object-id-generator'))
+const JwtDecoder = lazy(() => import('@app/page/jwt-decoder'))
+const Base64Image = lazy(() => import('@app/page/base64-image'))
+const Base64Text = lazy(() => import('@app/page/base64-text'))
+const TextReplacer = lazy(() => import('@app/page/text-replacer'))
+const HTML_JSX = lazy(() => import('@app/page/html-jsx'))
+const Base64URL = lazy(() => import('@app/page/base64-url'))
+const UuidGenerator = lazy(() => import('@app/page/uuid-generator'))
+const ObjectIdGenerator = lazy(() => import('@app/page/object-id-generator'))
 
 export const CATEGORIES: ICategory[] = [
   {

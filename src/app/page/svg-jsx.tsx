@@ -1,4 +1,4 @@
-import TransformLayout from '@renderer/components/layouts/transform'
+import TransformLayout from '@app/components/layouts/transform'
 import { useCallback, useState } from 'react'
 // import { transform } from '@svgr/core'
 

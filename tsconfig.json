@@ -16,8 +16,8 @@
       "*": [
         "node_modules/*"
       ],
-      "@renderer/*": [
-        "src/renderer/src/*"
+      "@app/*": [
+        "src/app/*"
       ],
       "@lib/*": [
         "src/lib/*"
