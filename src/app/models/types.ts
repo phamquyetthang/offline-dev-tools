@@ -28,6 +28,7 @@ export enum EXTENSION_KEY {
   base64_url = 'base64_url',
   uuid = 'uuid',
   object_id = 'object_id',
+  lorem_text = 'lorem_text',
 }
 
 export interface IExtension {

@@ -1,44 +1,60 @@
-import { Button } from '@lib/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@lib/components/ui/card'
-import { Input } from '@lib/components/ui/input'
+import { Button } from "@lib/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@lib/components/ui/card";
+import { Input } from "@lib/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
-} from '@lib/components/ui/select'
-import { EXTENSIONS_GENERATORS } from '@app/models/extensions'
-import { EXTENSION_KEY, IExtension } from '@app/models/types'
-import { useMemo, useState } from 'react'
-import CopyButton from '../components/copy-button'
-import CopyField from '../components/copy-field'
-import { useAppDispatch } from '@app/store'
-import { setRecentExtensions } from '@app/store/slice'
+  SelectValue,
+} from "@lib/components/ui/select";
+import { EXTENSIONS_GENERATORS } from "@app/models/extensions";
+import { EXTENSION_KEY, IExtension } from "@app/models/types";
+import { useMemo, useState } from "react";
+import CopyButton from "../components/copy-button";
+import CopyField from "../components/copy-field";
+import { useAppDispatch } from "@app/store";
+import { setRecentExtensions } from "@app/store/slice";
 
 interface GeneratorProps {
-  extensionKey: string
-  generateFunc: () => string
+  extensionKey: string;
+  generateFunc: () => string;
+  options?: string[];
+  optionValue?: string;
+  onChooseOption?: (value: string) => void;
 }
-const Generator = ({ extensionKey, generateFunc }: GeneratorProps) => {
-  const dispatch = useAppDispatch()
+const Generator = ({
+  extensionKey,
+  generateFunc,
+  options,
+  optionValue,
+  onChooseOption,
+}: GeneratorProps) => {
+  const dispatch = useAppDispatch();
 
   const extension = useMemo(
-    () => EXTENSIONS_GENERATORS.find((e) => e.key === extensionKey) as IExtension,
+    () =>
+      EXTENSIONS_GENERATORS.find((e) => e.key === extensionKey) as IExtension,
     [extensionKey]
-  )
-  const { title } = extension
+  );
+  const { title } = extension;
 
-  const [times, setTimes] = useState(5)
-  const [outputs, setOutputs] = useState<string[]>([])
+  const [times, setTimes] = useState(5);
+  const [outputs, setOutputs] = useState<string[]>([]);
 
   const onGenerate = () => {
-    const res: string[] = []
+    const res: string[] = [];
     for (let i = 0; i < times; i++) {
-      res.push(generateFunc())
+      res.push(generateFunc());
     }
-    setOutputs(res)
-  }
+    setOutputs(res);
+  };
   return (
     <div>
       <h3 className="font-semibold  mb-4">{title}</h3>
@@ -50,7 +66,7 @@ const Generator = ({ extensionKey, generateFunc }: GeneratorProps) => {
           <Select
             value={extensionKey}
             onValueChange={(value) => {
-              dispatch(setRecentExtensions(value as EXTENSION_KEY))
+              dispatch(setRecentExtensions(value as EXTENSION_KEY));
             }}
           >
             <SelectTrigger className="w-[180px]">
@@ -64,6 +80,28 @@ const Generator = ({ extensionKey, generateFunc }: GeneratorProps) => {
               ))}
             </SelectContent>
           </Select>
+
+          {!!options?.length && (
+            <div>
+              <h4 className="font-semibold mt-6 text-sm">Options</h4>
+              <Select value={optionValue} onValueChange={onChooseOption}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Generator option" />
+                </SelectTrigger>
+                <SelectContent>
+                  {options.map((option) => (
+                    <SelectItem
+                      value={option}
+                      key={option}
+                      className="capitalize"
+                    >
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
         </CardContent>
         <CardFooter>
           <div className="flex gap-2 items-center">
@@ -89,11 +127,14 @@ const Generator = ({ extensionKey, generateFunc }: GeneratorProps) => {
           ))}
         </CardContent>
         <CardFooter>
-          <CopyButton value={{ text: outputs?.join('\n') }} disabled={!outputs.length} />
+          <CopyButton
+            value={{ text: outputs?.join("\n") }}
+            disabled={!outputs.length}
+          />
         </CardFooter>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Generator
+export default Generator;

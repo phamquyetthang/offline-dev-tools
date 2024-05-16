@@ -15,6 +15,7 @@ const HTML_JSX = lazy(() => import('@app/page/html-jsx'))
 const Base64URL = lazy(() => import('@app/page/base64-url'))
 const UuidGenerator = lazy(() => import('@app/page/uuid-generator'))
 const ObjectIdGenerator = lazy(() => import('@app/page/object-id-generator'))
+const LoremTextGenerator = lazy(() => import('@app/page/generators/lorem-text'))
 
 export const CATEGORIES: ICategory[] = [
   {
@@ -87,6 +88,15 @@ export const EXTENSIONS_GENERATORS: IExtension[] = [
     iconNode: <SiMongodb />,
     page: <ObjectIdGenerator />,
     keywords: ['Mongo ObjectID Generator', 'id']
+  },
+  {
+    category: CATEGORIES_KEY.generators,
+    path: 'lorem_text',
+    title: 'Lorem text',
+    key: EXTENSION_KEY.lorem_text,
+    icon: 'text-select',
+    page: <LoremTextGenerator />,
+    keywords: ['Lorem text Generator', 'sample text', 'text generator', 'lorem ipsum']
   }
 ]
 
