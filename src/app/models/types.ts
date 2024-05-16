@@ -24,11 +24,14 @@ export enum EXTENSION_KEY {
   base64_text = 'base64_text',
   base64_image = 'base64_image',
   html_jsx = 'html_jsx',
+  json_ts = 'json_ts',
   svg_jsx = 'svg_jsx',
   base64_url = 'base64_url',
   uuid = 'uuid',
   object_id = 'object_id',
   lorem_text = 'lorem_text',
+  fake_data = 'fake_data',
+  fake_from_interface = 'fake_from_interface',
 }
 
 export interface IExtension {

@@ -16,6 +16,7 @@ const Base64URL = lazy(() => import('@app/page/base64-url'))
 const UuidGenerator = lazy(() => import('@app/page/uuid-generator'))
 const ObjectIdGenerator = lazy(() => import('@app/page/object-id-generator'))
 const LoremTextGenerator = lazy(() => import('@app/page/generators/lorem-text'))
+const FakeData = lazy(() => import('@app/page/generators/fake-data'))
 
 export const CATEGORIES: ICategory[] = [
   {
@@ -97,6 +98,24 @@ export const EXTENSIONS_GENERATORS: IExtension[] = [
     icon: 'text-select',
     page: <LoremTextGenerator />,
     keywords: ['Lorem text Generator', 'sample text', 'text generator', 'lorem ipsum']
+  },
+  {
+    category: CATEGORIES_KEY.generators,
+    path: 'fake_data',
+    title: 'Fake Data',
+    key: EXTENSION_KEY.fake_data,
+    icon: 'stamp',
+    page: <FakeData />,
+    keywords: ['Fake data', 'lorem data', 'data generator']
+  },
+  {
+    category: CATEGORIES_KEY.generators,
+    path: 'fake_from_interface',
+    title: 'Fake From Interface',
+    key: EXTENSION_KEY.fake_from_interface,
+    icon: 'printer',
+    page: <LoremTextGenerator />,
+    keywords: ['Fake data from typescript interface', 'lorem data', 'data generator']
   }
 ]
 
@@ -109,6 +128,15 @@ export const EXTENSIONS_TRANSFORM: IExtension[] = [
     key: EXTENSION_KEY.html_jsx,
     page: <HTML_JSX />,
     keywords: ['html to jsx', 'jsx to html', 'html to react']
+  },
+  {
+    category: CATEGORIES_KEY.transform,
+    path: 'json_ts',
+    title: 'JSON to TS Interface',
+    icon: 'align-horizontal-justify-center',
+    key: EXTENSION_KEY.json_ts,
+    page: <HTML_JSX />,
+    keywords: ['JSON to TS interface']
   }
 ]
 
