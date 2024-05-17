@@ -4,12 +4,14 @@ import { useTheme } from "../layouts/theme";
 import "ace-builds/src-noconflict/mode-json5";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-tsx";
+import "ace-builds/src-noconflict/mode-scss";
+import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-one_dark";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/ext-language_tools";
 import { memo } from "react";
 
-export type ICodeEditorLang = "json5" | "html" | "tsx";
+export type ICodeEditorLang = "json5" | "html" | "tsx" | "scss" | "css";
 interface ICodeEditorProps {
   lang: ICodeEditorLang;
   value: string;
