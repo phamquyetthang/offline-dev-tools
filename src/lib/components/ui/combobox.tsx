@@ -62,9 +62,10 @@ export default function Combobox({
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             {optionsGroup.map((group) => (
-              <CommandGroup heading={group.group}>
-                {group.options.map((option) => (
+              <CommandGroup heading={group.group} key={group.group}>
+                {group.options.map((option, index) => (
                   <CommandItem
+                    key={index}
                     className="capitalize"
                     value={option.value}
                     onSelect={(v) => onSelect(v, option)}

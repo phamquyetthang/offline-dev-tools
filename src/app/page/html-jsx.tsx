@@ -30,7 +30,7 @@ const HTML_JSX = () => {
       }}
       outputProps={{
         output: jsx,
-        outputLang: 'javascript',
+        outputLang: 'tsx',
         onChangeOutput: (v) => setJsx(v || ''),
         outputTitle: 'JSX'
       }}

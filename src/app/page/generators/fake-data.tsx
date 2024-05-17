@@ -202,9 +202,9 @@ const FakeData = () => {
             </div>
             {viewRaw ? (
               <CodeEditor
+                lang="json5"
                 value={JSON.stringify(outputs, null, 2)}
-                // onChange={onChange}
-                // height={(height || 200) - 24}
+                readOnly
               />
             ) : (
               <ReactJson src={outputs} displayDataTypes={false} />
