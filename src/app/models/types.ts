@@ -13,7 +13,8 @@ export enum CATEGORIES_KEY {
   text = 'text',
   encode_decode = 'encode_decode',
   generators = 'generators',
-  transform = 'transform'
+  transform = 'transform',
+  time = 'time'
 }
 
 export enum EXTENSION_KEY {
@@ -32,6 +33,7 @@ export enum EXTENSION_KEY {
   lorem_text = 'lorem_text',
   fake_data = 'fake_data',
   fake_from_interface = 'fake_from_interface',
+  world_clock = "world_clock"
 }
 
 export interface IExtension {
