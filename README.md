@@ -30,26 +30,19 @@ $ npm install
 ### Install
 
 ```bash
-$ npm install
+$ yarn install
 ```
 
 ### Development
 
 ```bash
-$ npm run dev
+$ yarn start
 ```
 
 ### Build
 
 ```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
+$ yarn make
 ```
 
 ### Contributing

@@ -22,12 +22,12 @@ const SVG_JSX = () => {
       inputProps={{
         input: svg,
         onChangeInput: (v) => setSvg(v || ''),
-        inputLang: 'xml',
+        inputLang: 'html',
         inputTitle: 'SVG'
       }}
       outputProps={{
         output: jsx,
-        outputLang: 'javascript',
+        outputLang: 'tsx',
         onChangeOutput: (v) => setJsx(v || ''),
         outputTitle: 'JSX'
       }}

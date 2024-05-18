@@ -18,7 +18,11 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({
+      description: 'Offline Dev Tools',
+      name: 'offline-dev-tools',
+      authors: 'Pham Quyet Thang'
+    }),
     // new MakerZIP({}, ["darwin"]),
     // new MakerRpm({}),
     new MakerDeb({
