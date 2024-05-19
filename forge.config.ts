@@ -4,6 +4,7 @@ import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerDeb } from "@electron-forge/maker-deb";
 // import { MakerRpm } from "@electron-forge/maker-rpm";
 import { MakerDMG } from "@electron-forge/maker-dmg";
+import { PublisherGithub } from "@electron-forge/publisher-github";
 
 import { AutoUnpackNativesPlugin } from "@electron-forge/plugin-auto-unpack-natives";
 import { WebpackPlugin } from "@electron-forge/plugin-webpack";
@@ -36,6 +37,14 @@ const config: ForgeConfig = {
     }),
     new MakerDMG({
       format: "ULFO",
+    }),
+  ],
+  publishers: [
+    new PublisherGithub({
+      repository: {
+        owner: "phamquyetthang",
+        name: "offline-dev-tools",
+      },
     }),
   ],
   plugins: [

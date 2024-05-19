@@ -8,7 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
+    "publish:app": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx ."
   },
   "keywords": [],
@@ -79,6 +79,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron-forge/plugin-webpack": "^7.4.0",
+    "@electron-forge/publisher-github": "^7.4.0",
     "@electron-toolkit/preload": "^3.0.1",
     "@electron/fuses": "^1.8.0",
     "@types/jsonwebtoken": "^9.0.6",
