@@ -6,12 +6,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@lib/components/ui/card";
-import { ArrowLeftRight, ArrowRightLeft, Columns2, Rows2 } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeftRight,
+  ArrowRight,
+  ArrowRightLeft,
+  Columns2,
+  Eraser,
+  Rows2,
+} from "lucide-react";
 import "./transform.css";
 import { memo, useState } from "react";
 import clsx from "clsx";
 import { useResizeDetector } from "react-resize-detector";
 import CodeEditor, { ICodeEditorLang } from "../components/code-editor";
+import { CopyIconButton } from "../components/copy-button";
 
 interface EditorProps {
   value: string;
@@ -119,44 +128,83 @@ const TransformLayout = ({
 
       <div
         className={clsx(
-          "gap-6 overflow-auto transform-content min-h-[80vh] flex",
+          "gap-3 overflow-auto transform-content min-h-[80vh] flex",
           isColumn
             ? [isRevert ? "flex-row-reverse" : "flex-row"]
             : [isRevert ? "flex-col-reverse" : "flex-col"]
         )}
       >
         <Card className="flex-1 flex flex-col items-stretch">
-          <CardHeader>
+          <CardHeader className="relative">
             <CardTitle>{inputTitle || "Input"}</CardTitle>
             {!!inputDesc && (
               <CardDescription className="break-all">
                 {inputDesc}
               </CardDescription>
             )}
+            <div className="absolute top-4 right-5 flex gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                disabled={!input}
+                onClick={() => onChangeInput("")}
+              >
+                <Eraser className="w-5 h-5" />
+              </Button>
+              <CopyIconButton value={{ text: input }} disabled={!input} />
+            </div>
           </CardHeader>
           <EditorContent
             elKey={inputKey}
-            onChange={onChangeInput}
+            onChange={(v) => {
+              onChangeInput(v);
+              if (!isRevert) {
+                onTransform(isRevert);
+              }
+            }}
             value={input}
             lang={inputLang}
             readOnly={isRevert}
           />
         </Card>
         <div className="flex justify-around mx-auto">
-          <Button onClick={() => onTransform(isRevert)}>Transform</Button>
+          <Button
+            variant="ghost"
+            onClick={() => onTransform(isRevert)}
+            size="icon"
+          >
+            {isColumn ? <ArrowRight /> : <ArrowDown />}
+          </Button>
         </div>
         <Card className="flex-1 flex flex-col">
-          <CardHeader>
+          <CardHeader className="relative">
             <CardTitle>{outputTitle || "Output"}</CardTitle>
             {!!outputDesc && (
               <CardDescription className="break-all">
                 {outputDesc}
               </CardDescription>
             )}
+
+            <div className="absolute top-4 right-5 flex gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                disabled={!output}
+                onClick={() => onChangeOutput("")}
+              >
+                <Eraser className="w-5 h-5" />
+              </Button>
+              <CopyIconButton value={{ text: output }} disabled={!output} />
+            </div>
           </CardHeader>
           <EditorContent
             elKey={outputKey}
-            onChange={onChangeOutput}
+            onChange={(v) => {
+              onChangeOutput(v);
+              if (isRevert) {
+                onTransform(isRevert);
+              }
+            }}
             value={output}
             lang={outputLang}
             readOnly={!isRevert}

@@ -37,6 +37,7 @@ const config: ForgeConfig = {
     }),
     new MakerDMG({
       format: "ULFO",
+      name: "offline-dev-tools",
     }),
   ],
   publishers: [

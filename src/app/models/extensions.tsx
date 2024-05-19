@@ -140,6 +140,7 @@ export const EXTENSIONS_GENERATORS: IExtension[] = [
       "lorem data",
       "data generator",
     ],
+    incomplete: true,
   },
 ];
 
@@ -161,6 +162,7 @@ export const EXTENSIONS_TRANSFORM: IExtension[] = [
     key: EXTENSION_KEY.json_ts,
     page: <HTML_JSX />,
     keywords: ["JSON to TS interface"],
+    incomplete: true,
   },
 ];
 

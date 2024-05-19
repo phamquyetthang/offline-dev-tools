@@ -1,29 +1,27 @@
-import { IExtension } from '@app/models/types'
-import CardExtension from './card-extension'
+import { IExtension } from "@app/models/types";
+import CardExtension from "./card-extension";
 
 interface IProps {
-  title: string
-  extensions: IExtension[]
+  title: string;
+  extensions: IExtension[];
+  pined?: boolean;
 }
-const GroupExtensions = ({ title, extensions }: IProps) => {
+const GroupExtensions = ({ title, extensions, pined }: IProps) => {
   return (
     <div>
       <h3 className="font-semibold mb-4">{title}</h3>
       <div className="flex flex-wrap gap-4">
         {extensions.map((e) => (
           <CardExtension
+            {...e}
             key={e.key}
-            icon={e.icon}
-            title={e.title}
-            alt={e.alt}
             extensionKey={e.key}
-            path={e.path}
-            iconNode={e.iconNode}
+            pined={pined}
           />
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GroupExtensions
+export default GroupExtensions;
