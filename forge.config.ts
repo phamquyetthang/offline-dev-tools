@@ -3,6 +3,8 @@ import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 // import { MakerZIP } from "@electron-forge/maker-zip";
 import { MakerDeb } from "@electron-forge/maker-deb";
 // import { MakerRpm } from "@electron-forge/maker-rpm";
+import { MakerDMG } from "@electron-forge/maker-dmg";
+
 import { AutoUnpackNativesPlugin } from "@electron-forge/plugin-auto-unpack-natives";
 import { WebpackPlugin } from "@electron-forge/plugin-webpack";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
@@ -19,18 +21,21 @@ const config: ForgeConfig = {
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
-      description: 'Offline Dev Tools',
-      name: 'offline-dev-tools',
-      authors: 'Pham Quyet Thang'
+      description: "Offline Dev Tools",
+      name: "offline-dev-tools",
+      authors: "Pham Quyet Thang",
     }),
     // new MakerZIP({}, ["darwin"]),
     // new MakerRpm({}),
     new MakerDeb({
       options: {
-        name: 'Offline Dev Tools',
+        name: "Offline Dev Tools",
         icon: "./src/lib/images/icon.png",
-        productName: 'Offline Dev Tools',
-      }
+        productName: "Offline Dev Tools",
+      },
+    }),
+    new MakerDMG({
+      format: "ULFO",
     }),
   ],
   plugins: [
