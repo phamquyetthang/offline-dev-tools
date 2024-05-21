@@ -64,25 +64,20 @@ Offline Dev Tools is an Electron application built with React and TypeScript. It
 
 Clone the repository and install the dependencies:
 
-````bash
-$ git clone https://github.com/yourusername/dev-sp.git
-$ cd dev-sp
-$ npm install
-## Project Setup
-
-### Install
-
 ```bash
-$ yarn install
-````
+$ git clone https://github.com/phamquyetthang/offline-dev-tools
+$ cd offline-dev-tools
 
-### Development
+$ yarn install
+```
+
+#### Development
 
 ```bash
 $ yarn start
 ```
 
-### Build
+#### Build
 
 ```bash
 $ yarn make
