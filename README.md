@@ -2,13 +2,56 @@
 
 Offline Dev Tools is an Electron application built with React and TypeScript. It provides a set of development tools for developer.
 
+## Downloads
+
+[![Windows](https://img.shields.io/badge/Download-Windows-blue?style=flat-square&logo=windows)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/local-dev-tools-1.0.0.Setup.exe)
+
+[![Linux](https://img.shields.io/badge/Download-Linux-orange?style=flat-square&logo=linux)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/offline-dev-tools_1.0.0_amd64.deb)
+
+[![macOS](https://img.shields.io/badge/Download-macOS-lightgrey?style=flat-square&logo=apple)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/offline-dev-tools.dmg)
+
+[![GitHub Release](https://img.shields.io/github/v/release/phamquyetthang/offline-dev-tools?style=flat-square&logo=github)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest)
+
 ## Features
 
-- Code editor with syntax highlighting and line numbers.
-- Support for multiple programming languages.
-- Clipboard functionality for images and text.
-- Persistent storage with Electron Store.
-- Keyboard shortcuts optimization.
+#### Generator tools
+
+- UUID Generator
+- Mongo ObjectId Generator
+- Lorem text Generator
+- Fake Data
+- Fake From Interface 🚧
+
+#### Transform tools
+
+- HTML ⇌ JSX
+- SCSS to CSS
+- JSON to TS Interface 🚧
+
+#### Encode/Decode tools
+
+- JWT Decoder
+- Base64 Text
+- Base64 Image
+- Base64 URL
+
+#### Time extensions
+
+- World Clocks
+
+#### Text extensions
+
+- Text Formatter
+- Text Replacer
+
+## Screenshots
+
+<img src="./public/0.png" height="200" />
+<img src="./public/1.png" height="200" />
+<img src="./public/2.png" height="200" />
+<img src="./public/3.png" height="200" />
+<img src="./public/4.png" height="200" />
+<img src="./public/5.png" height="200" />
 
 ## Getting Started
 
@@ -21,7 +64,7 @@ Offline Dev Tools is an Electron application built with React and TypeScript. It
 
 Clone the repository and install the dependencies:
 
-```bash
+````bash
 $ git clone https://github.com/yourusername/dev-sp.git
 $ cd dev-sp
 $ npm install
@@ -31,7 +74,7 @@ $ npm install
 
 ```bash
 $ yarn install
-```
+````
 
 ### Development
 
@@ -46,9 +89,9 @@ $ yarn make
 ```
 
 ### Contributing
+
 Contributions are welcome. Please open an issue first to discuss what you would like to change.
 
 ### License
+
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
