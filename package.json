@@ -10,8 +10,7 @@
     "make": "electron-forge make",
     "publish:app": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
-    "prepare": "husky",
-    "postinstall": "patch-package --use-yarn"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": {
