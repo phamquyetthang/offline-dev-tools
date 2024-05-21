@@ -26,6 +26,7 @@ export enum EXTENSION_KEY {
   base64_image = "base64_image",
   html_jsx = "html_jsx",
   json_ts = "json_ts",
+  scss_css = 'scss_css',
   svg_jsx = "svg_jsx",
   base64_url = "base64_url",
   uuid = "uuid",

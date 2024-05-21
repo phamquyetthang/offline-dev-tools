@@ -5,19 +5,21 @@ import {
   ICategory,
   IExtension,
 } from "@app/models/types";
-import { SiMongodb } from "react-icons/si";
+import { SiMongodb, SiSass } from "react-icons/si";
 
 import All from "@app/page/all";
 import EncoderDecoder from "@app/page/encoder-decoder";
 import Generators from "@app/page/generators";
 import Text from "@app/page/text";
 import TimeTools from "@app/page/time/time";
+import Transforms from "@app/page/transforms/list";
 
 const JwtDecoder = lazy(() => import("@app/page/jwt-decoder"));
 const Base64Image = lazy(() => import("@app/page/base64-image"));
 const Base64Text = lazy(() => import("@app/page/base64-text"));
 const TextReplacer = lazy(() => import("@app/page/text-replacer"));
 const HTML_JSX = lazy(() => import("@app/page/html-jsx"));
+const SCSS_CSS = lazy(() => import('@app/page/transforms/scss-css'))
 const Base64URL = lazy(() => import("@app/page/base64-url"));
 const UuidGenerator = lazy(() => import("@app/page/uuid-generator"));
 const ObjectIdGenerator = lazy(() => import("@app/page/object-id-generator"));
@@ -36,9 +38,9 @@ export const CATEGORIES: ICategory[] = [
   },
   {
     path: CATEGORIES_KEY.transform,
-    title: "Transform tools",
-    icon: "arrow-right-left",
-    page: <Generators />,
+    title: 'Transform tools',
+    icon: 'arrow-right-left',
+    page: <Transforms />
   },
   {
     path: CATEGORIES_KEY.text,
@@ -113,11 +115,11 @@ export const EXTENSIONS_GENERATORS: IExtension[] = [
     icon: "text-select",
     page: <LoremTextGenerator />,
     keywords: [
-      "Lorem text Generator",
-      "sample text",
-      "text generator",
-      "lorem ipsum",
-    ],
+      'Lorem text Generator',
+      'sample text',
+      'text generator',
+      'lorem ipsum'
+    ]
   },
   {
     category: CATEGORIES_KEY.generators,
@@ -161,10 +163,19 @@ export const EXTENSIONS_TRANSFORM: IExtension[] = [
     icon: "align-horizontal-justify-center",
     key: EXTENSION_KEY.json_ts,
     page: <HTML_JSX />,
-    keywords: ["JSON to TS interface"],
+    keywords: ['JSON to TS interface'],
     incomplete: true,
   },
-];
+  {
+    category: CATEGORIES_KEY.transform,
+    path: 'scss_css',
+    title: 'SCSS to CSS',
+    iconNode: <SiSass size={22} />,
+    key: EXTENSION_KEY.scss_css,
+    page: <SCSS_CSS />,
+    keywords: ['SASS to CSS', 'SCSS to CSS']
+  }
+]
 
 export const EXTENSIONS_ENCODE_DECODE: IExtension[] = [
   {
