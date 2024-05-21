@@ -4,11 +4,11 @@ Offline Dev Tools is an Electron application built with React and TypeScript. It
 
 ## Downloads
 
-[![Windows](https://img.shields.io/badge/Download-Windows-blue?style=flat-square&logo=windows)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/local-dev-tools-1.0.0.Setup.exe)
+[![Windows](https://img.shields.io/badge/Download-Windows-blue?style=flat-square&logo=windows)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/download/offline-dev-tools.exe)
 
-[![Linux](https://img.shields.io/badge/Download-Linux-orange?style=flat-square&logo=linux)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/offline-dev-tools_1.0.0_amd64.deb)
+[![Linux](https://img.shields.io/badge/Download-Linux-orange?style=flat-square&logo=linux)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/download/offline-dev-tools_amd64.deb)
 
-[![macOS](https://img.shields.io/badge/Download-macOS-lightgrey?style=flat-square&logo=apple)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/offline-dev-tools.dmg)
+[![macOS](https://img.shields.io/badge/Download-macOS-lightgrey?style=flat-square&logo=apple)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest/download/offline-dev-tools.dmg)
 
 [![GitHub Release](https://img.shields.io/github/v/release/phamquyetthang/offline-dev-tools?style=flat-square&logo=github)](https://github.com/phamquyetthang/offline-dev-tools/releases/latest)
 

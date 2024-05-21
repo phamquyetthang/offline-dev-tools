@@ -1,0 +1,13 @@
+diff --git a/node_modules/electron-installer-debian/src/installer.js b/node_modules/electron-installer-debian/src/installer.js
+index d31385c..6ce7a23 100644
+--- a/node_modules/electron-installer-debian/src/installer.js
++++ b/node_modules/electron-installer-debian/src/installer.js
+@@ -17,7 +17,7 @@ const spawn = require('./spawn')
+ const defaultLogger = debug('electron-installer-debian')
+ 
+ const defaultRename = (dest, src) => {
+-  return path.join(dest, '<%= name %>_<%= version %><% if (revision) { %>-<%= revision %><% } %>_<%= arch %>.deb')
++  return path.join(dest, '<%= name %>_<%= arch %>.deb')
+ }
+ 
+ /**

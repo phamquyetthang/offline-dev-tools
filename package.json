@@ -1,6 +1,6 @@
 {
-  "name": "local-dev-tools",
-  "productName": "local-dev-tools",
+  "name": "offline-dev-tools",
+  "productName": "offline-dev-tools",
   "version": "1.1.1",
   "description": "My Electron application description",
   "main": ".webpack/main",
@@ -10,7 +10,8 @@
     "make": "electron-forge make",
     "publish:app": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "patch-package --use-yarn"
   },
   "keywords": [],
   "author": {
@@ -52,6 +53,7 @@
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
     "next-themes": "^0.3.0",
+    "patch-package": "^8.0.0",
     "react": "^18.3.1",
     "react-ace": "^11.0.1",
     "react-dnd": "^16.0.1",

@@ -24,7 +24,8 @@ const config: ForgeConfig = {
     new MakerSquirrel({
       description: 'Offline Dev Tools',
       name: 'offline-dev-tools',
-      authors: 'Pham Quyet Thang'
+      authors: 'Pham Quyet Thang',
+      setupExe: 'offline-dev-tools.exe'
     }),
     // new MakerZIP({}, ["darwin"]),
     // new MakerRpm({}),
