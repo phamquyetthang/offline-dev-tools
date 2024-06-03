@@ -2,7 +2,7 @@
   "name": "offline-dev-tools",
   "productName": "offline-dev-tools",
   "version": "1.1.1",
-  "description": "My Electron application description",
+  "description": "Collection of useful offline tools for developers.",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
